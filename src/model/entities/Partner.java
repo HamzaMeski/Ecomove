@@ -122,4 +122,4 @@ public class Partner {
                 ", creationDate=" + creationDate +
                 '}';
     }
-}
+} 
