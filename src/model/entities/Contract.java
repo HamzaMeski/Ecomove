@@ -107,5 +107,4 @@ public class Contract {
         +", contractStatus: "+ contractStatus
         +'}';
     }
-
 }
