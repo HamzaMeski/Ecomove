@@ -1,31 +1,28 @@
 package model.seeder;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.SQLException;
+
+import model.DbConfig;
 
 public class Seeder {
     
     public static void main(String[] args) {
-        String jdbcUrl = "jdbc:postgresql://localhost:5432/";
-        String username = "postgres";
-        String password = "password";
-        String dbName = "ecomove";
+    
         Connection connection = null;
         Statement statement = null;
         
         try {
-            // Connect to PostgreSQL server and select the database
-            connection = DriverManager.getConnection(jdbcUrl + dbName, username, password);
+            connection = DbConfig.getConnection();
             statement = connection.createStatement();
             
-            // Create tables
+
             String createPartnerTable = "CREATE TABLE IF NOT EXISTS Partner (" +
                 "id UUID PRIMARY KEY, " +
                 "name VARCHAR(255) NOT NULL, " +
                 "contact_name VARCHAR(255), " +
-                "transport_type VARCHAR(50) CHECK (status IN ('PLAN', 'TRAIN', 'BUS')), " +
+                "transport_type VARCHAR(50) CHECK (transport_type IN ('PLAN', 'TRAIN', 'BUS')), " +
                 "geographic_area VARCHAR(255), " +
                 "special_conditions TEXT, " +
                 "status VARCHAR(50) CHECK (status IN ('ACTIVE', 'INACTIVE', 'SUSPENDED')), " +
@@ -49,7 +46,7 @@ public class Seeder {
                 "description TEXT, " +
                 "start_date DATE, " +
                 "end_date DATE, " +
-                "discount_type VARCHAR(50) CHECK (status IN ('PERCENTAGE', 'FIXED_AMOUNT')), " +
+                "discount_type VARCHAR(50) CHECK (discount_type IN ('PERCENTAGE', 'FIXED_AMOUNT')), " +
                 "discount_value DECIMAL(10, 2), " + 
                 "conditions TEXT, " +
                 "status VARCHAR(50) CHECK (status IN ('ACTIVE', 'EXPIRED', 'SUSPENDED')), " +
@@ -58,7 +55,7 @@ public class Seeder {
             
             String createTicketTable = "CREATE TABLE IF NOT EXISTS Ticket (" +
                 "id UUID PRIMARY KEY, " +
-                "transport_type VARCHAR(50) CHECK (status IN ('PLAN', 'TRAIN', 'BUS')), " +
+                "transport_type VARCHAR(50) CHECK (transport_type IN ('PLAN', 'TRAIN', 'BUS')), " +
                 "purchase_price DECIMAL(10, 2) NOT NULL, " + 
                 "sale_price DECIMAL(10, 2) NOT NULL, " + 
                 "sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
@@ -66,7 +63,6 @@ public class Seeder {
                 "contract_id UUID REFERENCES Contract(id)" +
             ")";
             
-            // Execute table creation
             statement.execute(createPartnerTable);
             statement.execute(createContractTable);
             statement.execute(createPromotionalOfferTable);
