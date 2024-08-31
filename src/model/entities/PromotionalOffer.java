@@ -125,13 +125,13 @@ public class PromotionalOffer {
     public String toString() {
         return "PromotionalOffer{" +
                 "id=" + id +
-                ", offerName='" + offerName + '\'' +
-                ", description='" + description + '\'' +
+                ", offerName='" + offerName +
+                ", description='" + description +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", discountType=" + discountType +
                 ", discountValue=" + discountValue +
-                ", conditions='" + conditions + '\'' +
+                ", conditions='" + conditions +
                 ", offerStatus=" + offerStatus +
                 '}';
     }
