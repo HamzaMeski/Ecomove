@@ -3,12 +3,10 @@ import view.contract.ContractMenu;
 import view.PromotionalOffer.PromotionalOfferMenu;
 import view.ticket.TicketMenu;
 
-import java.util.Scanner;
+import lib.ScanInput;
 
 public class Main {
     public static void main(String[] args) {
-
-        Scanner scanner = new Scanner(System.in);
 
         byte option; 
         do {
@@ -22,8 +20,8 @@ public class Main {
             System.out.println("    4=> Manage Tickets:---------------------------------------");
             System.out.println("    5=> Exit:-------------------------------------------------");
 
-            option = scanner.nextByte();
-            scanner.nextLine();
+            option = ScanInput.scanner.nextByte();
+            ScanInput.scanner.nextLine();
             switch(option) {
                 case 1:
                     PartnerMenu.displayMenu();
@@ -42,6 +40,5 @@ public class Main {
                 break; 
             }
         }while(option != 5);
-
     }
 }
