@@ -19,10 +19,10 @@ public class Seeder {
             
 
             String createPartnerTable = "CREATE TABLE IF NOT EXISTS Partner (" +
-                "id UUID PRIMARY KEY, " +
+                "id SERIAL PRIMARY KEY, " + 
                 "name VARCHAR(255) NOT NULL, " +
                 "contact_name VARCHAR(255), " +
-                "transport_type VARCHAR(50) CHECK (transport_type IN ('PLAN', 'TRAIN', 'BUS')), " +
+                "transport_type VARCHAR(50) CHECK (transport_type IN ('PLANE', 'TRAIN', 'BUS')), " +
                 "geographic_area VARCHAR(255), " +
                 "special_conditions TEXT, " +
                 "status VARCHAR(50) CHECK (status IN ('ACTIVE', 'INACTIVE', 'SUSPENDED')), " +
@@ -30,18 +30,18 @@ public class Seeder {
             ")";
 
             String createContractTable = "CREATE TABLE IF NOT EXISTS Contract (" +
-                "id UUID PRIMARY KEY, " +
+                "id SERIAL PRIMARY KEY, " + 
                 "start_date DATE NOT NULL, " +
                 "end_date DATE, " +
                 "special_rate DECIMAL(10, 2), " + 
                 "contract_conditions TEXT, " +
                 "renewable BOOLEAN, " +
                 "status VARCHAR(50) CHECK (status IN ('ONGOING', 'COMPLETED', 'SUSPENDED')), " +
-                "partner_id UUID REFERENCES Partner(id)" +
+                "partner_id INTEGER REFERENCES Partner(id)" +
             ")";
             
             String createPromotionalOfferTable = "CREATE TABLE IF NOT EXISTS PromotionalOffer (" +
-                "id UUID PRIMARY KEY, " +
+                "id SERIAL PRIMARY KEY, " + 
                 "offer_name VARCHAR(255) NOT NULL, " +
                 "description TEXT, " +
                 "start_date DATE, " +
@@ -50,17 +50,17 @@ public class Seeder {
                 "discount_value DECIMAL(10, 2), " + 
                 "conditions TEXT, " +
                 "status VARCHAR(50) CHECK (status IN ('ACTIVE', 'EXPIRED', 'SUSPENDED')), " +
-                "contract_id UUID REFERENCES Contract(id)" +
+                "contract_id INTEGER REFERENCES Contract(id)" +  
             ")";
             
             String createTicketTable = "CREATE TABLE IF NOT EXISTS Ticket (" +
-                "id UUID PRIMARY KEY, " +
+                "id SERIAL PRIMARY KEY, " + 
                 "transport_type VARCHAR(50) CHECK (transport_type IN ('PLAN', 'TRAIN', 'BUS')), " +
                 "purchase_price DECIMAL(10, 2) NOT NULL, " + 
                 "sale_price DECIMAL(10, 2) NOT NULL, " + 
                 "sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 "status VARCHAR(50) CHECK (status IN ('SOLD', 'CANCELED', 'PENDING')), " +
-                "contract_id UUID REFERENCES Contract(id)" +
+                "contract_id INTEGER REFERENCES Contract(id)" + 
             ")";
             
             statement.execute(createPartnerTable);

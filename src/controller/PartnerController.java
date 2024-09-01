@@ -1,5 +1,6 @@
 package controller;
 
+import model.entities.Partner;
 import model.dao.PartnerDAO;
 import view.partner.PartnerView;
 
@@ -12,8 +13,10 @@ public class PartnerController {
         this.view = view;
     }
 
-    public void addPartner() {
-        
+    public void addPartner(Partner partner) {
+        // System.out.println(partner);
+        model.addPartner(partner);
+        view.showAddPartnerMessage();
     }
      
     public void updatePartner() {
@@ -29,7 +32,7 @@ public class PartnerController {
     }
 
     public void listAllPartners() {
-        
+
     }
 }
 
