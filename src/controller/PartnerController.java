@@ -4,7 +4,7 @@ import model.entities.Partner;
 import model.dao.PartnerDAO;
 import view.partner.PartnerView;
 import lib.ScanInput;
-
+ 
 
 import java.util.List; 
 import java.util.ArrayList; 
@@ -38,8 +38,9 @@ public class PartnerController {
         view.displayParnter(partner);
     }
 
-    public void listAllPartners() {
+    public List<Partner> listAllPartners() {
         List<Partner> partners = model.listAllPartners();
         view.listAllPartners(partners);
+        return partners;
     }
 }

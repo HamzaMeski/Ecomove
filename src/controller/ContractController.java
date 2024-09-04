@@ -1,35 +1,40 @@
 package controller;
 
-import model.entities.Partner;
-import model.dao.PartnerDAO;
-import view.partner.PartnerView;
+import model.entities.Contract;
+import model.dao.ContractDAO;
+import view.contract.ContractView;
+
+import java.util.List; 
+import java.util.ArrayList; 
 
 public class ContractController {
-    private PartnerDAO model;
-    private PartnerView view;
+    private ContractDAO model;
+    private ContractView view;
 
-    public ContractController(PartnerDAO model, PartnerView view) {
+    public ContractController(ContractDAO model, ContractView view) {
         this.model = model;
         this.view = view;
     }
-
-    public void addPartner() {
-        
+ 
+    public void addContract(Contract contract) {
+        model.addContract(contract);
+        view.displayAddContractMessage();
     }
      
-    public void updatePartner() {
+    public void updateContract() {
 
     }
 
-    public void deletePartner() {
+    public void deleteContract() {
 
     }
 
-    public void displayPartner() {
+    public void displayContract() {
 
     }
 
-    public void listAllPartners() {
-
+    public void listAllContracts() {
+        List<Contract> contracts = model.listAllContracts();
+        view.listAllContracts(contracts);
     }
 }

@@ -33,12 +33,12 @@ public class Seeder {
                 "id SERIAL PRIMARY KEY, " + 
                 "start_date DATE NOT NULL, " +
                 "end_date DATE, " +
-                "special_rate DECIMAL(10, 2), " + 
-                "contract_conditions TEXT, " +
+                "special_price DECIMAL(10, 2), " + 
+                "agreement_conditions TEXT, " +
                 "renewable BOOLEAN, " +
                 "status VARCHAR(50) CHECK (status IN ('ONGOING', 'COMPLETED', 'SUSPENDED')), " +
                 "partner_id INTEGER REFERENCES Partner(id)" +
-            ")";
+            ")"; 
             
             String createPromotionalOfferTable = "CREATE TABLE IF NOT EXISTS PromotionalOffer (" +
                 "id SERIAL PRIMARY KEY, " + 

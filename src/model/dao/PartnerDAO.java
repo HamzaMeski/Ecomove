@@ -24,7 +24,7 @@ public class PartnerDAO {
             stmt.setString(6, partner.getPartnerStatus().toString());
             stmt.setDate(7, Date.valueOf(partner.getCreationDate()));
             stmt.executeUpdate();
-        } catch (SQLException e) {
+        } catch (SQLException e) { 
             e.printStackTrace();
         }
     }
