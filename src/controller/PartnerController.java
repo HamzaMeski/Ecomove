@@ -18,9 +18,10 @@ public class PartnerController {
         this.view = view;
     }
 
-    public void addPartner(Partner partner) {
-        model.addPartner(partner);
+    public int addPartner(Partner partner) {
+        int insertedPartnerId = model.addPartner(partner);
         view.showAddPartnerMessage();
+        return insertedPartnerId;
     }
      
     public void updatePartner(Partner partner) {

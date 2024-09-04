@@ -50,4 +50,8 @@ public class ContractView {
             }
         }
     }
+
+    public void displayUpdateContractMessage() {
+        System.out.println("    Contract updated successfully");
+    }
 }

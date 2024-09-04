@@ -5,6 +5,7 @@ import model.dao.PartnerDAO;
 import model.entities.Partner;
 import model.enums.PartnerStatus;
 import model.enums.TransportType;
+import view.contract.ContractMenu;
 import lib.ScanInput;
 
 import java.time.LocalDate;
@@ -133,7 +134,15 @@ public class PartnerMenu {
         LocalDate creationDate = LocalDate.now();
         
         Partner partner = new Partner(0, companyName, commercialContact, transportType, geographicalArea, specialConditions, partnerStatus, creationDate);
-        partnerController.addPartner(partner);
+        int insertedPartnerId = partnerController.addPartner(partner);
+
+        System.out.println("******************************");
+        System.out.println(insertedPartnerId);
+        System.out.println("******************************");
+
+        // the partner when creating it at least it must have one contract with us as a plateform
+        ContractMenu contractMenu = new ContractMenu();
+        contractMenu.addContract(insertedPartnerId);
     }
 
     public void updatePartner() {

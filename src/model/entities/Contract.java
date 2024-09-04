@@ -8,9 +8,9 @@ public class Contract {
     private int id;
     private LocalDate startDate;
     private LocalDate endDate;
-    private float specialPrice;
+    private Float specialPrice;
     private String agreementConditions;
-    private boolean renewable;
+    private Boolean renewable;
     private ContractStatus contractStatus;
     private int partnerId;
 
@@ -18,9 +18,9 @@ public class Contract {
         int id,
         LocalDate startDate,
         LocalDate endDate,
-        float specialPrice,
+        Float specialPrice,
         String agreementConditions, 
-        boolean renewable,
+        Boolean renewable,
         ContractStatus contractStatus,
         int partnerId
     )
@@ -51,7 +51,7 @@ public class Contract {
         return endDate;
     }
 
-    public float getSpecialPrice() {
+    public Float getSpecialPrice() {
         return specialPrice;
     }
 
@@ -59,7 +59,7 @@ public class Contract {
         return agreementConditions;
     }
 
-    public boolean getRenewable() {
+    public Boolean getRenewable() {
         return renewable;
     }
 

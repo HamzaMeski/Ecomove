@@ -6,12 +6,9 @@ import model.dao.ContractDAO;
 import model.entities.Contract;
 import model.entities.Partner;
 import model.enums.ContractStatus;
-import model.enums.PartnerStatus;
-import model.enums.TransportType;
 import lib.ScanInput;
 
 import model.dao.PartnerDAO;
-import view.partner.PartnerMenu;
 import view.partner.PartnerView;
 
 import java.time.LocalDate;
@@ -46,7 +43,7 @@ public class ContractMenu {
 
             switch (option) {
                 case 1:
-                    contractMenu.addContract();
+                    contractMenu.addContract(0);
                 break;
     
                 case 2:
@@ -84,12 +81,15 @@ public class ContractMenu {
         return enteredPartnerId;
     }
 
-    void addContract() {
+    public void addContract(int PartnerId) {
         System.out.println("||||||||||||||||||| ADD CONTRACT |||||||||||||||||||");
         /*
             Assigning contract to partner  
         */
-        int enteredPartnerId = getPartnerId();
+        int enteredPartnerId = PartnerId;
+        if(PartnerId == 0) {
+            enteredPartnerId = getPartnerId();
+        }
 
         /*
             setting startTime 
@@ -172,6 +172,9 @@ public class ContractMenu {
         Contract contract = new Contract(0, startDate, endDate, specialPrice, agreementConditions, renewable, contractStatus, enteredPartnerId);
         contractController.addContract(contract);
     }
+
+
+
 
     void updateContract() {
         System.out.println("||||||||||||||||||| UPDATE CONTRACT |||||||||||||||||||");
@@ -318,7 +321,7 @@ public class ContractMenu {
             contractStatus = ContractStatus.valueOf(contractStatusValue);
         }
 
-        Contract contract = new Contract(0, startDate, endDate, specialPrice, agreementConditions, renewable, contractStatus, enteredContractId);
+        Contract contract = new Contract(enteredContractId, startDate, endDate, specialPrice, agreementConditions, renewable, contractStatus, 0);
         contractController.updateContract(contract);
     }
 

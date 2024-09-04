@@ -12,10 +12,13 @@ import java.time.LocalDate;
 
 public class PartnerDAO {
 
-    public void addPartner(Partner partner) {
+    public int addPartner(Partner partner) {
         String sql = "INSERT INTO partner (name, contact_name, transport_type, geographic_area, special_conditions, status, creation_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        int generatedId = -1;  // Default value to indicate no ID has been generated
+    
         try (Connection conn = DbConfig.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+    
             stmt.setString(1, partner.getCompanyName());
             stmt.setString(2, partner.getCommercialContact());
             stmt.setString(3, partner.getTransportType().toString());
@@ -23,11 +26,24 @@ public class PartnerDAO {
             stmt.setString(5, partner.getSpecialConditions());
             stmt.setString(6, partner.getPartnerStatus().toString());
             stmt.setDate(7, Date.valueOf(partner.getCreationDate()));
-            stmt.executeUpdate();
-        } catch (SQLException e) { 
+    
+            int affectedRows = stmt.executeUpdate();
+    
+            // Check if the insert was successful
+            if (affectedRows > 0) {
+                try (ResultSet rs = stmt.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        generatedId = rs.getInt(1);  
+                    }
+                }
+            }
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+    
+        return generatedId; 
     }
+    
 
     public void updatePartner(Partner partner) {
         System.out.println(partner.getCompanyName());
