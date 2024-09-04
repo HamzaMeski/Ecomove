@@ -61,7 +61,7 @@ public class Seeder {
                 "sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
                 "status VARCHAR(50) CHECK (status IN ('SOLD', 'CANCELED', 'PENDING')), " +
                 "contract_id INTEGER REFERENCES Contract(id)" + 
-            ")";
+            ")"; 
             
             statement.execute(createPartnerTable);
             statement.execute(createContractTable);

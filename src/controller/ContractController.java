@@ -23,8 +23,8 @@ public class ContractController {
     }
      
     public void updateContract(Contract contract) {
-        System.out.println(contract);
-        System.out.println("#### #### ####");
+        model.updateContract(contract);
+        view.displayUpdateContractMessage();
     }
 
     public void deleteContract() {
