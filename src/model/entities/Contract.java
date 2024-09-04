@@ -12,6 +12,7 @@ public class Contract {
     private String agreementConditions;
     private boolean renewable;
     private ContractStatus contractStatus;
+    private int partnerId;
 
     public Contract(
         int id,
@@ -20,7 +21,9 @@ public class Contract {
         float specialPrice,
         String agreementConditions, 
         boolean renewable,
-        ContractStatus contractStatus)
+        ContractStatus contractStatus,
+        int partnerId
+    )
     {
         this.id = id;
         this.startDate = startDate; 
@@ -29,6 +32,7 @@ public class Contract {
         this.agreementConditions = agreementConditions; 
         this.renewable = renewable; 
         this.contractStatus = contractStatus;
+        this.partnerId = partnerId;
     }
 
     /*
@@ -63,13 +67,16 @@ public class Contract {
         return contractStatus;
     }
 
+    public int getPartnerId() {
+        return partnerId;
+    }
     /*
      * Setters
      */
 
     public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
-    }
+    } 
     
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
@@ -90,10 +97,14 @@ public class Contract {
     public void setContractStatus(ContractStatus contractStatus) {
         this.contractStatus = contractStatus;
     }
+    
+    public void setPartnerId(int partnerId) {
+        this.partnerId = partnerId;
+    }
 
     /*
      * toString Method
-     */
+    */
     
     @Override
     public String toString() {

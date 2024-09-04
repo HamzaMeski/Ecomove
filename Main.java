@@ -3,27 +3,32 @@ import view.contract.ContractMenu;
 import view.PromotionalOffer.PromotionalOfferMenu;
 import view.ticket.TicketMenu;
 
-import java.util.Scanner;
+import lib.ScanInput;
 
 public class Main {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-
-        byte option; 
+        byte option;
         do {
-            System.out.println("--------------------------------------------------------------");
-            System.out.println("--------------------------ECOMOVE-----------------------------");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println("Choose an option that you want to handle from the following:--");
-            System.out.println("    1=> Create and Manage Partners Profiles:------------------");
-            System.out.println("    2=> Manage Contracts:-------------------------------------");
-            System.out.println("    3=> Manage Promotional Offers:----------------------------");
-            System.out.println("    4=> Manage Tickets:---------------------------------------");
-            System.out.println("    5=> Exit:-------------------------------------------------");
-
-            option = scanner.nextByte();
-            scanner.nextLine();
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("|                                                                  |");
+            System.out.println("|                           <<ECOMOVE>>                            |");
+            System.out.println("|             TRAVELS TICKETING SYSTEM ADMINISTRATION              |");
+            System.out.println("|                                                                  |");
+            System.out.println("|                                                                  |");
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------------");
+            System.out.println("Choose an option that you want to handle from the following:");
+            System.out.println("    1=> Manage Partners Profiles:");
+            System.out.println("    2=> Manage Contracts:");
+            System.out.println("    3=> Manage Promotional Offers:");
+            System.out.println("    4=> Manage Tickets:");
+            System.out.println("    5=> Exit:");
+            System.out.print("    >>Set an option: ");
+            
+            option = ScanInput.scanner.nextByte();
+            ScanInput.scanner.nextLine();
             switch(option) {
                 case 1:
                     PartnerMenu.displayMenu();
@@ -42,6 +47,5 @@ public class Main {
                 break; 
             }
         }while(option != 5);
-
     }
 }
