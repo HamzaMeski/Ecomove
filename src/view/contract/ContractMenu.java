@@ -72,7 +72,7 @@ public class ContractMenu {
             enteredPartnerId = enteredId;
             ScanInput.scanner.nextLine();
             idExists = partners.stream().anyMatch(partner -> partner.getId() == enteredId);
-            
+             
             if (!idExists) {
                 System.out.println("        The entered ID does not exist. Please try again!");
             }
@@ -180,7 +180,7 @@ public class ContractMenu {
         System.out.println("||||||||||||||||||| UPDATE CONTRACT |||||||||||||||||||");
 
         System.out.println();
-
+        
         List<Contract> contracts = contractController.listAllContracts();
         boolean contractIdExist;
         int enteredContractId;

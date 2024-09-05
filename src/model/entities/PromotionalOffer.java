@@ -19,7 +19,7 @@ public class PromotionalOffer {
     private int contractId;
 
 
-    public PromotionalOffer(
+    public PromotionalOffer( 
         int id,
         String offerName,
         String description, 

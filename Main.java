@@ -32,7 +32,7 @@ public class Main {
             switch(option) {
                 case 1:
                     PartnerMenu.displayMenu();
-                break; 
+                break;  
 
                 case 2: 
                     ContractMenu.displayMenu();

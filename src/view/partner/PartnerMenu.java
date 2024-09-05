@@ -136,10 +136,6 @@ public class PartnerMenu {
         Partner partner = new Partner(0, companyName, commercialContact, transportType, geographicalArea, specialConditions, partnerStatus, creationDate);
         int insertedPartnerId = partnerController.addPartner(partner);
 
-        System.out.println("******************************");
-        System.out.println(insertedPartnerId);
-        System.out.println("******************************");
-
         // the partner when creating it at least it must have one contract with us as a plateform
         ContractMenu contractMenu = new ContractMenu();
         contractMenu.addContract(insertedPartnerId);
