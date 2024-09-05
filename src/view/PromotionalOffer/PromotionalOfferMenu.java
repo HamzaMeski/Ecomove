@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.ArrayList;
 
 import controller.PartnerController;
 import controller.PromotionalOfferController;
@@ -197,9 +198,6 @@ public class PromotionalOfferMenu {
 
         List<PromotionalOffer> promotionalOffers = promotionalOfferController.listAllPromotionalOffers();
         int contractId = promotionalOffers.get(0).getContractId();
-        System.out.println("#########");
-        System.out.println(contractId);
-        System.out.println("#########");
         if(promotionalOffers.size() != 0) {
             boolean promotionalOfferIdExist;
             int enteredPromotionId;
@@ -214,7 +212,157 @@ public class PromotionalOfferMenu {
                     System.out.println("        There is no matching Promotion for that ID. Please try again!");
                 }
             } while (!promotionalOfferIdExist);
-            System.out.println("good!");
+
+            /*
+                Getting the column that user will update
+            */ 
+            System.out.println("        <>Rows data to update:");
+            System.out.println("        (1)>>offer_name. ");
+            System.out.println("        (2)>>description. ");
+            System.out.println("        (3)>>start_date. ");
+            System.out.println("        (4)>>end_date. ");
+            System.out.println("        (5)>>discount_type. ");
+            System.out.println("        (6)>>discount_value. ");
+            System.out.println("        (7)>>conditions. ");
+            System.out.println("        (8)>>status ('ACTIVE', 'EXPIRED', 'SUSPENDED') ");
+            System.out.println("        >>Done setting columns (9).");
+            
+            System.out.println("        <>Set an option that you want to update in the promotion (1-9):");
+
+            List<Integer> optionsSets = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
+            List<Integer> userOptions = new ArrayList<>();
+            int option;
+            do {
+                option = ScanInput.scanner.nextByte();
+                ScanInput.scanner.nextLine();
+
+                if(!optionsSets.contains(option)) {
+                    System.out.print("\n        The value that you did set is not an option, set only the existing options: ");
+                }
+                if(!(option == 9) && optionsSets.contains(option)){
+                    userOptions.add(option);
+                }
+            }while(option != 9);
+
+            /*
+                setting offerName
+            */ 
+            String offerName = null;
+            if(userOptions.contains(1)) {
+                System.out.print("\n    >>Set offer name= ");
+                offerName = ScanInput.scanner.nextLine();
+            }
+          
+            /*
+                setting description
+            */ 
+            String description = null;
+            if(userOptions.contains(2)) {
+                System.out.print("\n    >>Set description= ");
+                description = ScanInput.scanner.nextLine();
+            }
+
+            /*
+                setting startTime 
+            */ 
+            LocalDate startDate = null;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            boolean checker;
+            if(userOptions.contains(3)) {
+                do {
+                    try {
+                        System.out.print("\n    >>Set start date (dd/MM/yy) (ex: 01/02/2024)= ");
+                        String dateString = ScanInput.scanner.nextLine();
+                        startDate = LocalDate.parse(dateString, formatter);
+                        checker = false;
+                    }catch(DateTimeParseException e) {
+                        System.out.print("\n        !! Invalid date pattern !!");
+                        checker = true;
+                    }
+                }while(checker);
+            }
+
+            /*
+                setting endTime 
+            */ 
+            LocalDate endDate = null;
+            if(userOptions.contains(4)) {
+                do {
+                    try {
+                        System.out.print("\n    >>Set end date (dd/MM/yy) (ex: 01/02/2024)= ");
+                        String dateString = ScanInput.scanner.nextLine();
+                        endDate = LocalDate.parse(dateString, formatter);
+                        checker = false;
+                    }catch(DateTimeParseException e) {
+                        System.out.print("\n        !! Invalid date pattern !!");
+                        checker = true;
+                    }
+                }while(checker);
+            }
+
+            /*
+                setting discountType
+            */ 
+            String discountTypeValue = null;
+            DiscountType discountType = null;
+            if(userOptions.contains(5)) {
+                byte discountTypeOption;
+                do {
+                    System.out.print(" \n   >>discount type (1.PERCENTAGE, 2.FIXED_AMOUNT)= ");
+                    System.out.print("\n        <>set 1, 2 for an option= ");
+                    discountTypeOption = ScanInput.scanner.nextByte(); 
+                    ScanInput.scanner.nextLine();
+    
+                }while(!(discountTypeOption == 1) && !(discountTypeOption == 2));
+                if(discountTypeOption == 1) discountTypeValue = "PERCENTAGE"; 
+                else if (discountTypeOption == 2) discountTypeValue = "FIXED_AMOUNT";
+                discountType = DiscountType.valueOf(discountTypeValue);
+            }
+
+            /*
+                setting discountValue
+            */ 
+            Float discountValue = null;
+            if(userOptions.contains(6)) {
+                System.out.print("\n    >>Set discount value= ");
+                discountValue = ScanInput.scanner.nextFloat();
+                ScanInput.scanner.nextLine();
+            }
+
+            /*
+                setting conditions
+            */ 
+            String conditions = null;
+            if(userOptions.contains(7)) {
+                System.out.print("\n    >>Set conditions= ");
+                conditions = ScanInput.scanner.nextLine();
+            }
+
+            /*
+                setting offerStatus
+            */ 
+            String offerStatusValue;
+            byte offerStatusOption;
+            OfferStatus offerStatus = null;
+            if(userOptions.contains(8)) {
+                do {
+                    System.out.print(" \n   >>offer status (1.ACTIVE, 2.EXPIRED, 3.SUSPENDED)= ");
+                    System.out.print("\n        <>set 1, 2 or 3 for an option= ");
+                    offerStatusOption = ScanInput.scanner.nextByte(); 
+                    ScanInput.scanner.nextLine();
+    
+                }while(!(offerStatusOption == 1) && !(offerStatusOption == 2) && !(offerStatusOption == 2));
+                if(offerStatusOption == 1) offerStatusValue = "ACTIVE"; 
+                else if (offerStatusOption == 2) offerStatusValue = "EXPIRED";
+                else offerStatusValue = "SUSPENDED";
+                offerStatus = OfferStatus.valueOf(offerStatusValue);
+            }
+
+            PromotionalOffer promotionalOffer = new PromotionalOffer(0, offerName, description, startDate, endDate, discountType, discountValue, conditions, offerStatus, contractId);
+            System.out.println("#############");
+            System.out.println(promotionalOffer);
+            System.out.println("#############");
+            promotionalOfferController.updatePromotionalOffer(promotionalOffer);
         }
     }
 
