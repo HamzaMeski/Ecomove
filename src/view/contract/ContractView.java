@@ -35,22 +35,26 @@ public class ContractView {
             }
         } while (!idExists);
 
-        for(byte i = 0; i < contracts.size(); i++) {
-            if(contracts.get(i).getPartnerId() == enteredPartnerId) {
-                System.out.println("++++++++++++++++++++++++ CONTRACT  ++++++++++++++++++++++++");
-                System.out.println("        >> id: "+contracts.get(i).getId());
-                System.out.println("        >> start date: "+contracts.get(i).getStartDate());
-                System.out.println("        >> end date: "+contracts.get(i).getEndDate());
-                System.out.println("        >> special price: "+contracts.get(i).getSpecialPrice());
-                System.out.println("        >> agreement conditions: "+contracts.get(i).getAgreementConditions());
-                System.out.println("        >> contract renewable: "+contracts.get(i).getRenewable());
-                System.out.println("        >> contract status: "+contracts.get(i).getContractStatus());
-                System.out.println("        >> partner id: "+contracts.get(i).getPartnerId());
-                System.out.println("");
+        if(contracts.size() == 0) {
+            System.out.println("        There is no contract assigned to that partner currently!");
+        }else {
+            for(byte i = 0; i < contracts.size(); i++) {
+                if(contracts.get(i).getPartnerId() == enteredPartnerId) {
+                    System.out.println("++++++++++++++++++++++++ CONTRACT  ++++++++++++++++++++++++");
+                    System.out.println("        >> id: "+contracts.get(i).getId());
+                    System.out.println("        >> start date: "+contracts.get(i).getStartDate());
+                    System.out.println("        >> end date: "+contracts.get(i).getEndDate());
+                    System.out.println("        >> special price: "+contracts.get(i).getSpecialPrice());
+                    System.out.println("        >> agreement conditions: "+contracts.get(i).getAgreementConditions());
+                    System.out.println("        >> contract renewable: "+contracts.get(i).getRenewable());
+                    System.out.println("        >> contract status: "+contracts.get(i).getContractStatus());
+                    System.out.println("        >> partner id: "+contracts.get(i).getPartnerId());
+                    System.out.println("");
+                }
             }
         }
     }
-
+ 
     public void displayUpdateContractMessage() {
         System.out.println("    Contract updated successfully");
     }

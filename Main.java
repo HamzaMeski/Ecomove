@@ -1,5 +1,5 @@
 import view.partner.PartnerMenu;
-import view.contract.ContractMenu;
+import view.contract.ContractMenu; 
 import view.PromotionalOffer.PromotionalOfferMenu;
 import view.ticket.TicketMenu;
 
@@ -44,8 +44,8 @@ public class Main {
 
                 case 4:
                     TicketMenu.displayMenu();
-                break; 
+                break;
             }
         }while(option != 5);
     }
-}
+} 

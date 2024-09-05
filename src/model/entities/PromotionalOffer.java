@@ -13,9 +13,11 @@ public class PromotionalOffer {
     private LocalDate startDate; 
     private LocalDate endDate;
     private DiscountType discountType;
-    private float discountValue;
+    private Float discountValue;
     private String conditions;
     private OfferStatus offerStatus;
+    private int contractId;
+
 
     public PromotionalOffer(
         int id,
@@ -24,10 +26,10 @@ public class PromotionalOffer {
         LocalDate startDate, 
         LocalDate endDate,
         DiscountType discountType,
-        float discountValue,
+        Float discountValue,
         String conditions,
-        OfferStatus offerStatus
-    
+        OfferStatus offerStatus,
+        int contractId
     )
     {
         this.id = id; 
@@ -39,6 +41,7 @@ public class PromotionalOffer {
         this.discountValue = discountValue; 
         this.conditions = conditions; 
         this.offerStatus = offerStatus;
+        this.contractId = contractId;
     }
 
       /*
@@ -69,7 +72,7 @@ public class PromotionalOffer {
         return discountType;
     }
 
-    public float getDiscountValue() {
+    public Float getDiscountValue() {
         return discountValue;
     }
 
@@ -79,6 +82,10 @@ public class PromotionalOffer {
 
     public OfferStatus getOfferStatus() {
         return offerStatus;
+    }
+
+    public int getContractId() {
+        return contractId;
     }
 
     /*
@@ -115,6 +122,10 @@ public class PromotionalOffer {
 
     public void setOfferStatus(OfferStatus offerStatus) {
         this.offerStatus = offerStatus;
+    }
+     
+    public void setContractId(int contractId) {
+        this.contractId =  contractId;
     }
 
     /*
