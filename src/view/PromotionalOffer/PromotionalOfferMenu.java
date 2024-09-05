@@ -72,7 +72,7 @@ public class PromotionalOfferMenu {
         boolean idExists;
         int enteredContractId;
         do {
-            System.out.print("      Set the id of the contract that you want assign it that promotional offer: ");
+            System.out.print("      Set the ID of the contract that you want assign it to that promotional offer: ");
             int enteredId = ScanInput.scanner.nextInt();
             enteredContractId = enteredId;
             ScanInput.scanner.nextLine();
@@ -86,20 +86,19 @@ public class PromotionalOfferMenu {
         return enteredContractId;
     }
  
-
     void addPromotionalOffer() {
-          System.out.println("||||||||||||||||||| ADD PROMOTIONAL OFFER |||||||||||||||||||");
+        System.out.println("||||||||||||||||||| ADD PROMOTIONAL OFFER |||||||||||||||||||");
         /*
             Assigning promotion to contract  
         */
-        int enteredContractId = getContractId();;
+        int enteredContractId = getContractId();
 
         /*
             setting offerName
         */ 
         System.out.print("\n    >>Set offer name= ");
         String offerName = ScanInput.scanner.nextLine();
-      
+        
         /*
             setting description
         */ 

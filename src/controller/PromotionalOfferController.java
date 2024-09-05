@@ -9,7 +9,7 @@ import view.PromotionalOffer.PromotionalOfferView;;
 public class PromotionalOfferController {
     private PromotionalOfferDAO model;
     private PromotionalOfferView view;
-     
+
     public PromotionalOfferController(PromotionalOfferDAO model, PromotionalOfferView view) {
         this.model = model; 
         this.view = view;
