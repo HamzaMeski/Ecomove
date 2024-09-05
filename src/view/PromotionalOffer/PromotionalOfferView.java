@@ -26,6 +26,7 @@ public class PromotionalOfferView {
     }
 
     public void listAllPromotionalOffers(List<PromotionalOffer> promotionalOffers) {
+        System.out.println();
         ContractDAO model = new ContractDAO();
         ContractView view = new ContractView();
         ContractController contractController = new ContractController(model, view);
@@ -45,9 +46,9 @@ public class PromotionalOfferView {
             }
         } while (!idExists);
 
-        if(promotionalOffers.size() == 0) {
-            System.out.println("        There is no assigned promotion to that contract!");
-        }else {
+        int contractIdFinal = enteredContractId;
+        boolean isPromotionalOffersNotEmpty = promotionalOffers.stream().anyMatch( promotion -> promotion.getContractId() == contractIdFinal );
+        if(isPromotionalOffersNotEmpty) {
             for(byte i = 0; i < promotionalOffers.size(); i++) {
                 if(promotionalOffers.get(i).getContractId() == enteredContractId) {
                     System.out.println("++++++++++++++++++++++++ PROMOTIONAL OFFER  ++++++++++++++++++++++++");
@@ -64,6 +65,8 @@ public class PromotionalOfferView {
                     System.out.println("");
                 }
             }
+        }else {
+            System.out.println("        There is no assigned promotion to that contract!");
         }
     }
 }

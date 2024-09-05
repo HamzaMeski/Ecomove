@@ -35,9 +35,9 @@ public class ContractView {
             }
         } while (!idExists);
 
-        if(contracts.size() == 0) {
-            System.out.println("        There is no contract assigned to that partner currently!");
-        }else {
+        int partnerIdFinal = enteredPartnerId;
+        boolean isContractsNotEmpty = contracts.stream().anyMatch( contract -> contract.getPartnerId() == partnerIdFinal );
+        if(isContractsNotEmpty) {
             for(byte i = 0; i < contracts.size(); i++) {
                 if(contracts.get(i).getPartnerId() == enteredPartnerId) {
                     System.out.println("++++++++++++++++++++++++ CONTRACT  ++++++++++++++++++++++++");
@@ -52,6 +52,8 @@ public class ContractView {
                     System.out.println("");
                 }
             }
+        }else {
+            System.out.println("        There is no contract assigned to that partner currently!");
         }
     }
  
