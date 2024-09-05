@@ -27,7 +27,7 @@ public class PromotionalOfferController {
 
     public List<PromotionalOffer> listAllPromotionalOffers() {
         List<PromotionalOffer> promotionalOffers = model.listAllPromotionalOffers();
-        view.listAllPromotionalOffers(promotionalOffers);
-        return promotionalOffers;
+        List<PromotionalOffer> currentContractPromotionalOffers =  view.listAllPromotionalOffers(promotionalOffers);
+        return currentContractPromotionalOffers;
     }
 }

@@ -192,7 +192,30 @@ public class PromotionalOfferMenu {
     }
 
     void updatePromotionalOffer() {
+        System.out.println("||||||||||||||||||| UPDATE PROMOTIONAL OFFER |||||||||||||||||||");
+        System.out.println();
 
+        List<PromotionalOffer> promotionalOffers = promotionalOfferController.listAllPromotionalOffers();
+        int contractId = promotionalOffers.get(0).getContractId();
+        System.out.println("#########");
+        System.out.println(contractId);
+        System.out.println("#########");
+        if(promotionalOffers.size() != 0) {
+            boolean promotionalOfferIdExist;
+            int enteredPromotionId;
+            do {
+                System.out.print("      Set the ID of the promotional offer that you want to update: ");
+                int enteredId = ScanInput.scanner.nextInt();
+                enteredPromotionId = enteredId;
+                ScanInput.scanner.nextLine();
+                promotionalOfferIdExist = promotionalOffers.stream().anyMatch(promotion -> promotion.getId() == enteredId);
+    
+                if (!promotionalOfferIdExist) {
+                    System.out.println("        There is no matching Promotion for that ID. Please try again!");
+                }
+            } while (!promotionalOfferIdExist);
+            System.out.println("good!");
+        }
     }
 
     void listAllPromotionalOffers() {

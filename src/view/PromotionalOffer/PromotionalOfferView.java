@@ -25,7 +25,7 @@ public class PromotionalOfferView {
         System.out.println("    Promotional offer updated successfully!");
     }
 
-    public void listAllPromotionalOffers(List<PromotionalOffer> promotionalOffers) {
+    public List<PromotionalOffer> listAllPromotionalOffers(List<PromotionalOffer> promotionalOffers) {
         System.out.println();
         ContractDAO model = new ContractDAO();
         ContractView view = new ContractView();
@@ -35,7 +35,7 @@ public class PromotionalOfferView {
         boolean idExists;
         int enteredContractId;
         do {
-            System.out.print("      Set the id of the contract that you want to showcase its promotions: ");
+            System.out.print("      Set the ID of the contract that you want to showcase its promotions: ");
             int enteredId = ScanInput.scanner.nextInt();
             enteredContractId = enteredId;
             ScanInput.scanner.nextLine();
@@ -46,11 +46,15 @@ public class PromotionalOfferView {
             }
         } while (!idExists);
 
+        // 
+        List<PromotionalOffer> currentContractPromotionalOffers = new ArrayList(List.of());
+
         int contractIdFinal = enteredContractId;
         boolean isPromotionalOffersNotEmpty = promotionalOffers.stream().anyMatch( promotion -> promotion.getContractId() == contractIdFinal );
         if(isPromotionalOffersNotEmpty) {
             for(byte i = 0; i < promotionalOffers.size(); i++) {
                 if(promotionalOffers.get(i).getContractId() == enteredContractId) {
+                    currentContractPromotionalOffers.add(promotionalOffers.get(i));
                     System.out.println("++++++++++++++++++++++++ PROMOTIONAL OFFER  ++++++++++++++++++++++++");
                     System.out.println("        >> id: "+promotionalOffers.get(i).getId());
                     System.out.println("        >> offer name : "+promotionalOffers.get(i).getOfferName());
@@ -68,5 +72,7 @@ public class PromotionalOfferView {
         }else {
             System.out.println("        There is no assigned promotion to that contract!");
         }
+        
+        return currentContractPromotionalOffers;
     }
 }
