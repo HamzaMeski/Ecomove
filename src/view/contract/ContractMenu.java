@@ -11,7 +11,7 @@ import lib.ScanInput;
 import model.dao.PartnerDAO;
 import view.partner.PartnerView;
 
-import java.time.LocalDate;
+import java.time.LocalDate; 
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -80,7 +80,7 @@ public class ContractMenu {
 
         return enteredPartnerId;
     }
-
+ 
     public void addContract(int PartnerId) {
         System.out.println("||||||||||||||||||| ADD CONTRACT |||||||||||||||||||");
         /*

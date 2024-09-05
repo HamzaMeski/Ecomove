@@ -39,7 +39,7 @@ public class Seeder {
                 "status VARCHAR(50) CHECK (status IN ('ONGOING', 'COMPLETED', 'SUSPENDED')), " +
                 "partner_id INTEGER REFERENCES Partner(id)" +
             ")"; 
-            
+             
             String createPromotionalOfferTable = "CREATE TABLE IF NOT EXISTS PromotionalOffer (" +
                 "id SERIAL PRIMARY KEY, " + 
                 "offer_name VARCHAR(255) NOT NULL, " +
