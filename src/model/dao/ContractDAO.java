@@ -27,7 +27,7 @@ public class ContractDAO {
         }
     }
 
-public List<Contract> listAllContracts() {
+    public List<Contract> listAllContracts() {
         List<Contract> contracts = new ArrayList<>();
         String sql = "SELECT * FROM contract";
         try (Connection conn = DbConfig.getConnection();
@@ -80,6 +80,11 @@ public List<Contract> listAllContracts() {
         if(contract.getContractStatus() != null) {
             sqlColumns.add( " status = ? ");
             counter++;
+        }
+        
+        if (counter == 0) {
+            // No fields to update
+            return;
         }
 
         String sql = "UPDATE contract SET";

@@ -8,16 +8,16 @@ import model.enums.TransportType;
 public class Ticket {
     private int id; 
     private TransportType transportType; 
-    private float purchasePrice;
-    private float salePrice; 
+    private Float purchasePrice;
+    private Float salePrice; 
     private LocalDate saleDate; 
     private TicketStatus ticketStatus;
 
     public Ticket(
         int id,
         TransportType transportType,
-        float purchasePrice,
-        float salePrice,
+        Float purchasePrice,
+        Float salePrice,
         LocalDate saleDate, 
         TicketStatus ticketStatus
     )
@@ -42,11 +42,11 @@ public class Ticket {
         return transportType;
     }
 
-    public float getPurchasePrice() {
+    public Float getPurchasePrice() {
         return purchasePrice;
     }
 
-    public float getSalePrice() {
+    public Float getSalePrice() {
         return salePrice;
     }
 
