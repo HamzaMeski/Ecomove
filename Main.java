@@ -16,7 +16,6 @@ public class Main {
             System.out.println("|                           <<ECOMOVE>>                            |");
             System.out.println("|             TRAVELS TICKETING SYSTEM ADMINISTRATION              |");
             System.out.println("|                                                                  |");
-            System.out.println("|                                                                  |");
             System.out.println("--------------------------------------------------------------------");
             System.out.println("--------------------------------------------------------------------");
             System.out.println("Choose an option that you want to handle from the following:");
@@ -26,13 +25,13 @@ public class Main {
             System.out.println("    4=> Manage Tickets:");
             System.out.println("    5=> Exit:");
             System.out.print("    >>Set an option: ");
-            
+
             option = ScanInput.scanner.nextByte();
             ScanInput.scanner.nextLine();
             switch(option) {
                 case 1:
                     PartnerMenu.displayMenu();
-                break;  
+                break; 
 
                 case 2: 
                     ContractMenu.displayMenu();
@@ -48,4 +47,4 @@ public class Main {
             }
         }while(option != 5);
     }
-} 
+}

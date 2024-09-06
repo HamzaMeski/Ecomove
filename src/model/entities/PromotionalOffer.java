@@ -130,7 +130,7 @@ public class PromotionalOffer {
 
     /*
      * toString Method
-     */
+    */
 
     @Override
     public String toString() {

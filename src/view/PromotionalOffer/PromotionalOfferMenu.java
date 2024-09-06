@@ -197,8 +197,9 @@ public class PromotionalOfferMenu {
         System.out.println();
 
         List<PromotionalOffer> promotionalOffers = promotionalOfferController.listAllPromotionalOffers();
-        int contractId = promotionalOffers.get(0).getContractId();
+        int contractId;
         if(promotionalOffers.size() != 0) {
+            contractId = promotionalOffers.get(0).getContractId();
             boolean promotionalOfferIdExist;
             int enteredPromotionId;
             do {
@@ -358,7 +359,7 @@ public class PromotionalOfferMenu {
                 offerStatus = OfferStatus.valueOf(offerStatusValue);
             }
 
-            PromotionalOffer promotionalOffer = new PromotionalOffer(0, offerName, description, startDate, endDate, discountType, discountValue, conditions, offerStatus, contractId);
+            PromotionalOffer promotionalOffer = new PromotionalOffer(enteredPromotionId, offerName, description, startDate, endDate, discountType, discountValue, conditions, offerStatus, contractId);
             System.out.println("#############");
             System.out.println(promotionalOffer);
             System.out.println("#############");

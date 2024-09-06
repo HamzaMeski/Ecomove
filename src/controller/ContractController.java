@@ -5,8 +5,6 @@ import model.dao.ContractDAO;
 import view.contract.ContractView;
 
 import java.util.List; 
-import java.util.ArrayList; 
-import model.entities.Contract;
 
 public class ContractController {
     private ContractDAO model;
@@ -25,14 +23,6 @@ public class ContractController {
     public void updateContract(Contract contract) {
         model.updateContract(contract);
         view.displayUpdateContractMessage();
-    }
-
-    public void deleteContract() {
-
-    }
-
-    public void displayContract() {
-
     }
 
     public List<Contract> listAllContracts() {
