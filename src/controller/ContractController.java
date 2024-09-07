@@ -14,12 +14,12 @@ public class ContractController {
         this.model = model;
         this.view = view;
     }
- 
+
     public void addContract(Contract contract) {
         model.addContract(contract);
         view.displayAddContractMessage();
     }
-     
+
     public void updateContract(Contract contract) {
         model.updateContract(contract);
         view.displayUpdateContractMessage();

@@ -41,7 +41,7 @@ public class Main {
                     PromotionalOfferMenu.displayMenu();
                 break; 
 
-                case 4:
+                case 4: 
                     TicketMenu.displayMenu();
                 break;
             }

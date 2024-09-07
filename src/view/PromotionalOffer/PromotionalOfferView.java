@@ -1,20 +1,14 @@
 package view.PromotionalOffer;
 
 import java.util.List;
-
 import lib.ScanInput;
 
 import java.util.ArrayList;
 import model.entities.PromotionalOffer;
-import src.controller.PartnerController;
-import src.model.dao.PartnerDAO;
-import src.model.entities.Partner;
-import src.view.partner.PartnerView;
-
-import model.entities.Contract;
+import model.entities.Contract;      
 import controller.ContractController;
-import model.dao.ContractDAO; 
-import view.contract.ContractView;
+import model.dao.ContractDAO;        
+import view.contract.ContractView;   
 
 public class PromotionalOfferView {
     public void showAddPromotionMessage() {
@@ -31,7 +25,7 @@ public class PromotionalOfferView {
         ContractView view = new ContractView();
         ContractController contractController = new ContractController(model, view);
         List<Contract> contracts = contractController.listAllContracts();
-
+        
         boolean idExists;
         int enteredContractId;
         do {
