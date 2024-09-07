@@ -19,7 +19,7 @@ public class PromotionalOfferView {
         System.out.println("    Promotional offer updated successfully!");
     }
 
-    public List<PromotionalOffer> listAllPromotionalOffers(List<PromotionalOffer> promotionalOffers) {
+    public List<PromotionalOffer> listContractPromotionalOffers(List<PromotionalOffer> promotionalOffers) {
         System.out.println();
         ContractDAO model = new ContractDAO();
         ContractView view = new ContractView();
@@ -49,18 +49,18 @@ public class PromotionalOfferView {
             for(byte i = 0; i < promotionalOffers.size(); i++) {
                 if(promotionalOffers.get(i).getContractId() == enteredContractId) {
                     currentContractPromotionalOffers.add(promotionalOffers.get(i));
-                    System.out.println("++++++++++++++++++++++++ PROMOTIONAL OFFER  ++++++++++++++++++++++++");
-                    System.out.println("        >> id: "+promotionalOffers.get(i).getId());
-                    System.out.println("        >> offer name : "+promotionalOffers.get(i).getOfferName());
-                    System.out.println("        >> description : "+promotionalOffers.get(i).getDescription());
-                    System.out.println("        >> start date: "+promotionalOffers.get(i).getStartDate());
-                    System.out.println("        >> end date: "+promotionalOffers.get(i).getEndDate());
-                    System.out.println("        >> discount type: "+promotionalOffers.get(i).getDiscountType());
-                    System.out.println("        >> get discount value: "+promotionalOffers.get(i).getDiscountValue());
-                    System.out.println("        >> get conditions: "+promotionalOffers.get(i).getConditions());
-                    System.out.println("        >> get offer status: "+promotionalOffers.get(i).getOfferStatus());
-                    System.out.println("        >> get contact id: "+promotionalOffers.get(i).getContractId());
-                    System.out.println("");
+                    System.out.print("\n════════════════ PROMOTIONAL OFFER ID: " + promotionalOffers.get(i).getId() + " ════════════════");
+                    System.out.print("\n  * Offer Name           : " + promotionalOffers.get(i).getOfferName());
+                    System.out.print("\n  * Description          : " + promotionalOffers.get(i).getDescription());
+                    System.out.print("\n  * Start Date           : " + promotionalOffers.get(i).getStartDate());
+                    System.out.print("\n  * End Date             : " + promotionalOffers.get(i).getEndDate());
+                    System.out.print("\n  * Discount Type        : " + promotionalOffers.get(i).getDiscountType());
+                    System.out.print("\n  * Discount Value       : " + promotionalOffers.get(i).getDiscountValue());
+                    System.out.print("\n  * Conditions           : " + promotionalOffers.get(i).getConditions());
+                    System.out.print("\n  * Offer Status         : " + promotionalOffers.get(i).getOfferStatus());
+                    System.out.print("\n  * Contract ID          : " + promotionalOffers.get(i).getContractId());
+                    System.out.println("\n════════════════════════════════════════════════════════════════");
+                    System.out.println();                    
                 }
             }
         }else {

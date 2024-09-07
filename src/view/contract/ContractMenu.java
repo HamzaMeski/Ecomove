@@ -27,17 +27,21 @@ public class ContractMenu {
         ContractMenu contractMenu = new ContractMenu();
         byte option;
         do {
+            System.out.println("\n");
+            System.out.println("  ┌─────────────────────────────────────────────────────────────┐");
+            System.out.println("  │                                                             │");
+            System.out.println("  │                   ■ Contract Management ■                   │");
+            System.out.println("  │                                                             │");
+            System.out.println("  └─────────────────────────────────────────────────────────────┘");
             System.out.println("");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println("|                                                            |");
-            System.out.println("|                      Contract Management:                  |");
-            System.out.println("|                                                            |");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println(" -1) Add Contract:");
-            System.out.println(" -2) Update Contract:");
-            System.out.println(" -3) List all Contracts:");
-            System.out.println(" -4) Back:");
-
+            System.out.println("     ─────────────────────────────────────────────────────────");
+            System.out.println("     │  1 - Add Contract                                     │");
+            System.out.println("     │  2 - Update Contract                                  │");
+            System.out.println("     │  3 - List all Contracts                               │");
+            System.out.println("     │  4 - Back                                             │");
+            System.out.println("     ─────────────────────────────────────────────────────────");
+            System.out.print("\n     Enter your choice (1-4): ");
+            
             option = ScanInput.scanner.nextByte();
             ScanInput.scanner.nextLine();
 

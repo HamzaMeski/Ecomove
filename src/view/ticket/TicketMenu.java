@@ -27,16 +27,20 @@ public class TicketMenu {
         TicketMenu ticketMenu = new TicketMenu();
         byte option;
         do {
+            System.out.println("\n");
+            System.out.println("  ┌─────────────────────────────────────────────────────────────┐");
+            System.out.println("  │                                                             │");
+            System.out.println("  │                  ■ Ticket Management ■                      │");
+            System.out.println("  │                                                             │");
+            System.out.println("  └─────────────────────────────────────────────────────────────┘");
             System.out.println("");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println("|                                                            |");
-            System.out.println("|                    Ticket Management:                      |");
-            System.out.println("|                                                            |");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println(" -1) Add Ticket:");
-            System.out.println(" -2) Update Ticket:");
-            System.out.println(" -3) List all Tickets:");
-            System.out.println(" -4) Back:");
+            System.out.println("     ─────────────────────────────────────────────────────────");
+            System.out.println("     │  1 - Add Ticket                                       │");
+            System.out.println("     │  2 - Update Ticket                                    │");
+            System.out.println("     │  3 - List all Tickets                                 │");
+            System.out.println("     │  4 - Back                                             │");
+            System.out.println("     ─────────────────────────────────────────────────────────");
+            System.out.print("\n     Enter your choice (1-4): ");
 
             option = ScanInput.scanner.nextByte();
             ScanInput.scanner.nextLine();
@@ -49,7 +53,7 @@ public class TicketMenu {
                     ticketMenu.updateTicket();
                     break;
                 case 3:
-                    ticketMenu.listAllTickets();
+                    ticketMenu.listContractTickets();
                     break;
             }
         } while (option != 4);
@@ -105,7 +109,7 @@ public class TicketMenu {
         System.out.println("||||||||||||||||||| UPDATE TICKET |||||||||||||||||||");
         System.out.println();
 
-        List<Ticket> tickets = ticketController.listAllTickets();
+        List<Ticket> tickets = ticketController.listContractTickets();
         if (tickets.size() != 0) {
             int ticketId = getTicketId(tickets);
 
@@ -241,7 +245,7 @@ public class TicketMenu {
         return userOptions;
     }
 
-    void listAllTickets() {
-        ticketController.listAllTickets();
+    void listContractTickets() {
+        ticketController.listContractTickets();
     }
-}
+} 
