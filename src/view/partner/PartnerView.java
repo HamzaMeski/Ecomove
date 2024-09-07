@@ -35,7 +35,7 @@ public class PartnerView {
     public void showUpdatePartnerMessage() {
         System.out.println("Partner updated successfully!");
     }
-     
+
     public void displayParnter(Partner partner) {
         System.out.println(partner);
     }

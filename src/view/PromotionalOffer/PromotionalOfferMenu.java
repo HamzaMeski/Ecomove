@@ -6,18 +6,11 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
 
-import controller.PartnerController;
 import controller.PromotionalOfferController;
 import lib.ScanInput;
-import model.dao.PartnerDAO;
 import model.dao.PromotionalOfferDAO;
 import model.entities.Contract;
-import model.entities.Partner;
-import view.PromotionalOffer.PromotionalOfferView;
-import view.contract.ContractMenu;
-import view.partner.PartnerView; 
 import model.entities.PromotionalOffer;
-import model.enums.ContractStatus;
 import model.enums.DiscountType;
 import model.enums.OfferStatus;
 

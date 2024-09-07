@@ -54,7 +54,7 @@ public class Seeder {
             
             String createTicketTable = "CREATE TABLE IF NOT EXISTS Ticket (" +
                 "id SERIAL PRIMARY KEY, " + 
-                "transport_type VARCHAR(50) CHECK (transport_type IN ('PLAN', 'TRAIN', 'BUS')), " +
+                "transport_type VARCHAR(50) CHECK (transport_type IN ('PLANE', 'TRAIN', 'BUS')), " +
                 "purchase_price DECIMAL(10, 2) NOT NULL, " + 
                 "sale_price DECIMAL(10, 2) NOT NULL, " + 
                 "sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +

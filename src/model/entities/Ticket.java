@@ -12,6 +12,7 @@ public class Ticket {
     private Float salePrice; 
     private LocalDate saleDate; 
     private TicketStatus ticketStatus;
+    private int contractId;
 
     public Ticket(
         int id,
@@ -19,7 +20,8 @@ public class Ticket {
         Float purchasePrice,
         Float salePrice,
         LocalDate saleDate, 
-        TicketStatus ticketStatus
+        TicketStatus ticketStatus,
+        int contractId
     )
     {
         this.id = id; 
@@ -28,6 +30,7 @@ public class Ticket {
         this.salePrice = salePrice; 
         this.saleDate = saleDate; 
         this.ticketStatus = ticketStatus;
+        this.contractId = contractId;
     }
 
     /*
@@ -58,9 +61,13 @@ public class Ticket {
         return ticketStatus;
     }
 
+    public int getContractId() {
+        return contractId;
+    }
+
     /*
      * Setters
-     */
+    */
 
     public void setTransportType(TransportType transportType) {
         this.transportType = transportType;
@@ -82,9 +89,13 @@ public class Ticket {
         this.ticketStatus = ticketStatus;
     }
 
+    public void setContractId(int contractId) {
+        this.contractId = contractId;
+    }
+
     /*
      * toString Method
-     */
+    */
 
     @Override
     public String toString() {

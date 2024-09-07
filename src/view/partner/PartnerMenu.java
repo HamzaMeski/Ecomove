@@ -145,125 +145,128 @@ public class PartnerMenu {
         System.out.println("||||||||||||||||||| UPDATE PARTNER |||||||||||||||||||");
     
         System.out.println();
-        partnerController.listAllPartners();
-        System.out.print("    # Set the ID of the partner that you want to update: ");
-        int partnerId =  ScanInput.scanner.nextInt();
-        ScanInput.scanner.nextLine();
+        List<Partner> partners = partnerController.listAllPartners();
+        if(partners.size() != 0) {
 
-        /*
-            Getting the column that user will update
-        */ 
-        System.out.println("        <>Rows data to update:");
-        System.out.println("        (1)>>company name. ");
-        System.out.println("        (2)>>commercial contact. ");
-        System.out.println("        (3)>>transport type. ");
-        System.out.println("        (4)>>geographical area. ");
-        System.out.println("        (5)>>special conditions. ");
-        System.out.println("        (6)>>partner status. ");
-        System.out.println("        >>Done setting columns (7).");
-        
-        System.out.println("        <>Set an option that you want to update options between(1-7):");
-
-        List<Integer> optionsSets = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7));
-        List<Integer> userOptions = new ArrayList<>();
-        int option;
-        do {
-            option = ScanInput.scanner.nextByte();
+            System.out.print("    # Set the ID of the partner that you want to update: ");
+            int partnerId =  ScanInput.scanner.nextInt();
             ScanInput.scanner.nextLine();
-
-            if(!optionsSets.contains(option)) {
-                System.out.print("\n        The value that you did set is not an option, set only the existing options: ");
-            }
-            if(!(option == 7) && optionsSets.contains(option)){
-                userOptions.add(option);
-            }
-        }while(option != 7);
-
-        String companyName;
-        if(userOptions.contains(1)) {
-            System.out.print("      *Set the company name: ");
-            companyName = ScanInput.scanner.nextLine();
-        } else{
-            companyName = null;
-        }
-
-        String commercialContact;
-        if(userOptions.contains(2)){
-            System.out.print("\n        *Set the commercial contact: ");
-            commercialContact = ScanInput.scanner.nextLine();
-        } else{
-            commercialContact = null;
-        }
-         
-        TransportType transportType;
-        if(userOptions.contains(3)){
-            String transportTypeValue;
-            byte transportTypeOption;
+    
+            /*
+                Getting the column that user will update
+            */ 
+            System.out.println("        <>Rows data to update:");
+            System.out.println("        (1)>>company name. ");
+            System.out.println("        (2)>>commercial contact. ");
+            System.out.println("        (3)>>transport type. ");
+            System.out.println("        (4)>>geographical area. ");
+            System.out.println("        (5)>>special conditions. ");
+            System.out.println("        (6)>>partner status. ");
+            System.out.println("        >>Done setting columns (7).");
+            
+            System.out.println("        <>Set an option that you want to update options between(1-7):");
+    
+            List<Integer> optionsSets = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7));
+            List<Integer> userOptions = new ArrayList<>();
+            int option;
             do {
-                System.out.print("\n        *transport type (1.PLANE, 2.TRAIN, 3.BUS) ");
-                System.out.print("\n            <>set 1, 2 or 3 for an option= ");
-                transportTypeOption = ScanInput.scanner.nextByte(); 
+                option = ScanInput.scanner.nextByte();
                 ScanInput.scanner.nextLine();
-            } while(!(transportTypeOption == 1) && !(transportTypeOption == 2) && !(transportTypeOption == 3));
-            if(transportTypeOption == 1) transportTypeValue = "PLANE";
-            else if(transportTypeOption == 2) transportTypeValue = "TRAIN"; 
-            else transportTypeValue = "BUS";
-            transportType = TransportType.valueOf(transportTypeValue);
-        } else{
-            transportType = null;
+    
+                if(!optionsSets.contains(option)) {
+                    System.out.print("\n        The value that you did set is not an option, set only the existing options: ");
+                }
+                if(!(option == 7) && optionsSets.contains(option)){
+                    userOptions.add(option);
+                }
+            }while(option != 7);
+    
+            String companyName;
+            if(userOptions.contains(1)) {
+                System.out.print("      *Set the company name: ");
+                companyName = ScanInput.scanner.nextLine();
+            } else{
+                companyName = null;
+            }
+    
+            String commercialContact;
+            if(userOptions.contains(2)){
+                System.out.print("\n        *Set the commercial contact: ");
+                commercialContact = ScanInput.scanner.nextLine();
+            } else{
+                commercialContact = null;
+            }
+             
+            TransportType transportType;
+            if(userOptions.contains(3)){
+                String transportTypeValue;
+                byte transportTypeOption;
+                do {
+                    System.out.print("\n        *transport type (1.PLANE, 2.TRAIN, 3.BUS) ");
+                    System.out.print("\n            <>set 1, 2 or 3 for an option= ");
+                    transportTypeOption = ScanInput.scanner.nextByte(); 
+                    ScanInput.scanner.nextLine();
+                } while(!(transportTypeOption == 1) && !(transportTypeOption == 2) && !(transportTypeOption == 3));
+                if(transportTypeOption == 1) transportTypeValue = "PLANE";
+                else if(transportTypeOption == 2) transportTypeValue = "TRAIN"; 
+                else transportTypeValue = "BUS";
+                transportType = TransportType.valueOf(transportTypeValue);
+            } else{
+                transportType = null;
+            }
+             
+            String geographicalArea;
+            if(userOptions.contains(4)){
+                System.out.print("\n        *Set the geographical area: ");
+                geographicalArea = ScanInput.scanner.nextLine();
+            }else {
+                geographicalArea = null;
+            }
+            
+            String specialConditions;
+            if(userOptions.contains(5)){
+                System.out.print("\n        *Set the special conditions: ");
+                specialConditions = ScanInput.scanner.nextLine();
+            }else {
+                specialConditions = null;
+            }
+    
+            PartnerStatus partnerStatus;
+            if(userOptions.contains(6)){
+                String partnerStatusValue;
+                byte partnerStatusOption;
+                do {
+                    System.out.print(" \n       *partner status (1.ACTIVE, 2.INACTIVE, 3.SUSPENDED): ");
+                    System.out.print("\n            <>set 1, 2 or 3 for an option: ");
+                    partnerStatusOption = ScanInput.scanner.nextByte(); 
+                    ScanInput.scanner.nextLine();
+                    
+                }while(!(partnerStatusOption == 1) && !(partnerStatusOption == 2) && !(partnerStatusOption == 3) );
+                if(partnerStatusOption == 1) partnerStatusValue = "ACTIVE"; 
+                else if (partnerStatusOption == 2) partnerStatusValue = "INACTIVE";
+                else partnerStatusValue = "SUSPENDED";
+                partnerStatus = PartnerStatus.valueOf(partnerStatusValue);
+            }else {
+                partnerStatus = null;
+            }
+    
+            /*
+                Partner entity
+            */ 
+            Partner partner = new Partner
+                (
+                    partnerId, 
+                    (companyName != null && !companyName.isEmpty())  ? companyName : null, 
+                    (commercialContact != null && !commercialContact.isEmpty()) ? commercialContact : null,
+                    (transportType != null) ? transportType: null,
+                    (geographicalArea != null && !geographicalArea.isEmpty()) ? geographicalArea: null,
+                    (specialConditions != null && !specialConditions.isBlank()) ? specialConditions: null,
+                    (partnerStatus != null) ? partnerStatus : null,
+                    null
+                );
+    
+            partnerController.updatePartner(partner);
         }
-         
-        String geographicalArea;
-        if(userOptions.contains(4)){
-            System.out.print("\n        *Set the geographical area: ");
-            geographicalArea = ScanInput.scanner.nextLine();
-        }else {
-            geographicalArea = null;
-        }
-        
-        String specialConditions;
-        if(userOptions.contains(5)){
-            System.out.print("\n        *Set the special conditions: ");
-            specialConditions = ScanInput.scanner.nextLine();
-        }else {
-            specialConditions = null;
-        }
-
-        PartnerStatus partnerStatus;
-        if(userOptions.contains(6)){
-            String partnerStatusValue;
-            byte partnerStatusOption;
-            do {
-                System.out.print(" \n       *partner status (1.ACTIVE, 2.INACTIVE, 3.SUSPENDED): ");
-                System.out.print("\n            <>set 1, 2 or 3 for an option: ");
-                partnerStatusOption = ScanInput.scanner.nextByte(); 
-                ScanInput.scanner.nextLine();
-                
-            }while(!(partnerStatusOption == 1) && !(partnerStatusOption == 2) && !(partnerStatusOption == 3) );
-            if(partnerStatusOption == 1) partnerStatusValue = "ACTIVE"; 
-            else if (partnerStatusOption == 2) partnerStatusValue = "INACTIVE";
-            else partnerStatusValue = "SUSPENDED";
-            partnerStatus = PartnerStatus.valueOf(partnerStatusValue);
-        }else {
-            partnerStatus = null;
-        }
-
-        /*
-            Partner entity
-        */ 
-        Partner partner = new Partner
-            (
-                partnerId, 
-                (companyName != null && !companyName.isEmpty())  ? companyName : null, 
-                (commercialContact != null && !commercialContact.isEmpty()) ? commercialContact : null,
-                (transportType != null) ? transportType: null,
-                (geographicalArea != null && !geographicalArea.isEmpty()) ? geographicalArea: null,
-                (specialConditions != null && !specialConditions.isBlank()) ? specialConditions: null,
-                (partnerStatus != null) ? partnerStatus : null,
-                null
-            );
-
-        partnerController.updatePartner(partner);
     }
 
     public void deletePartner() {
