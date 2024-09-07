@@ -40,16 +40,16 @@ public class ContractView {
         if(isContractsNotEmpty) {
             for(byte i = 0; i < contracts.size(); i++) {
                 if(contracts.get(i).getPartnerId() == enteredPartnerId) {
-                    System.out.println("++++++++++++++++++++++++ CONTRACT  ++++++++++++++++++++++++");
-                    System.out.println("        >> id: "+contracts.get(i).getId());
-                    System.out.println("        >> start date: "+contracts.get(i).getStartDate());
-                    System.out.println("        >> end date: "+contracts.get(i).getEndDate());
-                    System.out.println("        >> special price: "+contracts.get(i).getSpecialPrice());
-                    System.out.println("        >> agreement conditions: "+contracts.get(i).getAgreementConditions());
-                    System.out.println("        >> contract renewable: "+contracts.get(i).getRenewable());
-                    System.out.println("        >> contract status: "+contracts.get(i).getContractStatus());
-                    System.out.println("        >> partner id: "+contracts.get(i).getPartnerId());
-                    System.out.println("");
+                    System.out.print("\n════════════════ CONTRACT ID: " + contracts.get(i).getId() + " ════════════════");
+                    System.out.print("\n  * Start Date            : " + contracts.get(i).getStartDate());
+                    System.out.print("\n  * End Date              : " + contracts.get(i).getEndDate());
+                    System.out.print("\n  * Special Price         : " + contracts.get(i).getSpecialPrice());
+                    System.out.print("\n  * Agreement Conditions  : " + contracts.get(i).getAgreementConditions());
+                    System.out.print("\n  * Renewable             : " + contracts.get(i).getRenewable());
+                    System.out.print("\n  * Contract Status       : " + contracts.get(i).getContractStatus());
+                    System.out.print("\n  * Partner ID            : " + contracts.get(i).getPartnerId());
+                    System.out.println("\n════════════════════════════════════════════════════════════════");
+                    System.out.println();                                      
                 }
             }
         }else {

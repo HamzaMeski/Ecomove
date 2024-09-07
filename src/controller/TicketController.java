@@ -1,5 +1,6 @@
 package controller; 
 import view.ticket.TicketView;
+import model.entities.PromotionalOffer;
 import model.entities.Ticket;
 import model.dao.TicketDAO;
 import java.util.List;
@@ -23,7 +24,9 @@ public class TicketController {
         view.displayUpdateTicketMessage();
     }
 
-    public List<Ticket> listAllTickets() {
-        return model.listAllTickets();
+    public List<Ticket> listContractTickets() { 
+        List<Ticket> tickets = model.listAllTickets();
+        List<Ticket> contractTickets =  view.listContractTickets(tickets);
+        return contractTickets;
     }
 }

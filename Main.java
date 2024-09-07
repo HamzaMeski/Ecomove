@@ -10,22 +10,26 @@ public class Main {
 
         byte option;
         do {
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("|                                                                  |");
-            System.out.println("|                           <<ECOMOVE>>                            |");
-            System.out.println("|             TRAVELS TICKETING SYSTEM ADMINISTRATION              |");
-            System.out.println("|                                                                  |");
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println("Choose an option that you want to handle from the following:");
-            System.out.println("    1=> Manage Partners Profiles:");
-            System.out.println("    2=> Manage Contracts:");
-            System.out.println("    3=> Manage Promotional Offers:");
-            System.out.println("    4=> Manage Tickets:");
-            System.out.println("    5=> Exit:");
-            System.out.print("    >>Set an option: ");
-
+            System.out.println("\n\n");
+            System.out.println("╔══════════════════════════════════════════════════════════════════╗");
+            System.out.println("║                                                                  ║");
+            System.out.println("║                    ╔═══════════════════╗                         ║");
+            System.out.println("║                    ║     <<ECOMOVE>>   ║                         ║");
+            System.out.println("║                    ╚═══════════════════╝                         ║");
+            System.out.println("║          TRAVELS TICKETING SYSTEM ADMINISTRATION                 ║");
+            System.out.println("║                                                                  ║");
+            System.out.println("╠══════════════════════════════════════════════════════════════════╣");
+            System.out.println("║                                                                  ║");
+            System.out.println("║  Choose an option:                                               ║");
+            System.out.println("║                                                                  ║");
+            System.out.println("║    [1] ■ Manage Partners Profiles                                ║");
+            System.out.println("║    [2] ■ Manage Contracts                                        ║");
+            System.out.println("║    [3] ■ Manage Promotional Offers                               ║");
+            System.out.println("║    [4] ■ Manage Tickets                                          ║");
+            System.out.println("║    [5] × Exit                                                    ║");
+            System.out.println("║                                                                  ║");
+            System.out.println("╚══════════════════════════════════════════════════════════════════╝");
+            System.out.print("\n    >> Enter your choice (1-5): ");
             option = ScanInput.scanner.nextByte();
             ScanInput.scanner.nextLine();
             switch(option) {

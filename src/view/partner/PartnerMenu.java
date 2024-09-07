@@ -27,18 +27,22 @@ public class PartnerMenu {
         PartnerMenu partnerMenu = new PartnerMenu();
         byte option;
         do {
+            System.out.println("\n");
+            System.out.println("  ┌─────────────────────────────────────────────────────────────┐");
+            System.out.println("  │                                                             │");
+            System.out.println("  │                   ■ Partner Management ■                    │");
+            System.out.println("  │                                                             │");
+            System.out.println("  └─────────────────────────────────────────────────────────────┘");
             System.out.println("");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println("|                                                            |");
-            System.out.println("|                       Partner Management:                  |");
-            System.out.println("|                                                            |");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println(" -1) Add Partner:");
-            System.out.println(" -2) Update Partner:");
-            System.out.println(" -3) Delete Partner:");
-            System.out.println(" -4) Search a Partner:");
-            System.out.println(" -5) List all Partners:");
-            System.out.println(" -6) Back:");
+            System.out.println("     ─────────────────────────────────────────────────────────");
+            System.out.println("     │  1 - Add Partner                                      │");
+            System.out.println("     │  2 - Update Partner                                   │");
+            System.out.println("     │  3 - Delete Partner                                   │");
+            System.out.println("     │  4 - Search a Partner                                 │");
+            System.out.println("     │  5 - List all Partners                                │");
+            System.out.println("     │  6 - Back                                             │");
+            System.out.println("     ─────────────────────────────────────────────────────────");
+            System.out.print("\n     Enter your choice (1-6): ");
 
             option = ScanInput.scanner.nextByte();
             ScanInput.scanner.nextLine();

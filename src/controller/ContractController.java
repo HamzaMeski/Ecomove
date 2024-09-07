@@ -19,7 +19,7 @@ public class ContractController {
         model.addContract(contract);
         view.displayAddContractMessage();
     }
-
+ 
     public void updateContract(Contract contract) {
         model.updateContract(contract);
         view.displayUpdateContractMessage();

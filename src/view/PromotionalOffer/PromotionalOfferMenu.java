@@ -27,16 +27,20 @@ public class PromotionalOfferMenu {
         PromotionalOfferMenu promotionalOfferMenu = new PromotionalOfferMenu();
         byte option;
         do {
+            System.out.println("\n");
+            System.out.println("  ┌─────────────────────────────────────────────────────────────┐");
+            System.out.println("  │                                                             │");
+            System.out.println("  │             ■ Promotional Offer Management ■                │");
+            System.out.println("  │                                                             │");
+            System.out.println("  └─────────────────────────────────────────────────────────────┘");
             System.out.println("");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println("|                                                            |");
-            System.out.println("|                Promotional Offer Management:               |");
-            System.out.println("|                                                            |");
-            System.out.println("--------------------------------------------------------------");
-            System.out.println(" -1) Add Promotion:");
-            System.out.println(" -2) Update Promotion:");
-            System.out.println(" -3) List all Promotions:");
-            System.out.println(" -4) Back:");
+            System.out.println("     ─────────────────────────────────────────────────────────");
+            System.out.println("     │  1 - Add Promotion                                    │");
+            System.out.println("     │  2 - Update Promotion                                 │");
+            System.out.println("     │  3 - List all Promotions                              │");
+            System.out.println("     │  4 - Back                                             │");
+            System.out.println("     ─────────────────────────────────────────────────────────");
+            System.out.print("\n     Enter your choice (1-4): ");
 
             option = ScanInput.scanner.nextByte();
             ScanInput.scanner.nextLine();
@@ -51,7 +55,7 @@ public class PromotionalOfferMenu {
                 break;
     
                 case 3:
-                    promotionalOfferMenu.listAllPromotionalOffers();
+                    promotionalOfferMenu.listContractPromotionalOffers();
                 break;
             }
         }while (option != 4);
@@ -189,7 +193,7 @@ public class PromotionalOfferMenu {
         System.out.println("||||||||||||||||||| UPDATE PROMOTIONAL OFFER |||||||||||||||||||");
         System.out.println();
 
-        List<PromotionalOffer> promotionalOffers = promotionalOfferController.listAllPromotionalOffers();
+        List<PromotionalOffer> promotionalOffers = promotionalOfferController.listContractPromotionalOffers();
         int contractId;
         if(promotionalOffers.size() != 0) {
             contractId = promotionalOffers.get(0).getContractId();
@@ -360,7 +364,7 @@ public class PromotionalOfferMenu {
         }
     }
 
-    void listAllPromotionalOffers() {
-        promotionalOfferController.listAllPromotionalOffers();
+    void listContractPromotionalOffers() {
+        promotionalOfferController.listContractPromotionalOffers();
     }
 }

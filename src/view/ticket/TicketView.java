@@ -20,7 +20,7 @@ public class TicketView {
         System.out.println("    Ticket updated successfully!");
     }
     
-    public List<Ticket> listAllTickets(List<Ticket> tickets) {
+    public List<Ticket> listContractTickets(List<Ticket> tickets) {
         System.out.println();
 
         ContractDAO model = new ContractDAO();
@@ -50,15 +50,15 @@ public class TicketView {
             for (Ticket ticket : tickets) {
                 if (ticket.getContractId() == enteredContractId) {
                     currentContractTickets.add(ticket);
-                    System.out.println("++++++++++++++++++++++++ TICKET ++++++++++++++++++++++++");
-                    System.out.println("        >> id: " + ticket.getId());
-                    System.out.println("        >> transport type: " + ticket.getTransportType());
-                    System.out.println("        >> purchase price: " + ticket.getPurchasePrice());
-                    System.out.println("        >> sale price: " + ticket.getSalePrice());
-                    System.out.println("        >> sale date: " + ticket.getSaleDate());
-                    System.out.println("        >> ticket status: " + ticket.getTicketStatus());
-                    System.out.println("        >> contract id: " + ticket.getContractId());
-                    System.out.println("");
+                    System.out.print("\n════════════════ TICKET ID: " + ticket.getId()+" ═════════════════");
+                    System.out.print("\n  * Transport Type: "+      ticket.getTransportType());
+                    System.out.print("\n  * Purchase Price: "+      ticket.getPurchasePrice());
+                    System.out.print("\n  * Sale Price    : "+      ticket.getSalePrice());
+                    System.out.print("\n  * Sale Date     : "+      ticket.getSaleDate());
+                    System.out.print("\n  * Ticket Status : "+      ticket.getTicketStatus());
+                    System.out.print("\n  * Contract ID   : "+      ticket.getContractId());
+                    System.out.println("\n════════════════════════════════════════════════════════════════");
+                    System.out.println();
                 }
             }
         } else {
