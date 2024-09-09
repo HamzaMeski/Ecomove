@@ -7,7 +7,9 @@ import lib.ScanInput;
 
 public class Main {
     public static void main(String[] args) {
-
+        /*
+         * Application Menu:
+         */
         byte option;
         do {
             System.out.println("\n\n");
