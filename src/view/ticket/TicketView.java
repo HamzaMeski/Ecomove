@@ -56,6 +56,11 @@ public class TicketView {
                     System.out.print("\n  * Sale Price    : "+      ticket.getSalePrice());
                     System.out.print("\n  * Sale Date     : "+      ticket.getSaleDate());
                     System.out.print("\n  * Ticket Status : "+      ticket.getTicketStatus());
+                    System.out.print("\n  * Ticket Status : "+      ticket.getTicketStatus());
+                    System.out.print("\n  * Ticket departure : "+      ticket.getDeparture());
+                    System.out.print("\n  * Ticket depatrure time : "+      ticket.getDepartureTime());
+                    System.out.print("\n  * Ticket destination : "+      ticket.getDestination());
+                    System.out.print("\n  * Ticket destination time : "+      ticket.getDestinationTime());
                     System.out.print("\n  * Contract ID   : "+      ticket.getContractId());
                     System.out.println("\n════════════════════════════════════════════════════════════════");
                     System.out.println();

@@ -1,6 +1,7 @@
 package model.entities; 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import model.enums.TicketStatus;
 import model.enums.TransportType; 
@@ -12,6 +13,10 @@ public class Ticket {
     private Float salePrice; 
     private LocalDate saleDate; 
     private TicketStatus ticketStatus;
+    private String departure;
+    private LocalDateTime departureTime;
+    private String destination;
+    private LocalDateTime destinationTime;
     private int contractId;
 
     public Ticket(
@@ -21,6 +26,10 @@ public class Ticket {
         Float salePrice,
         LocalDate saleDate, 
         TicketStatus ticketStatus,
+        String departure, 
+        LocalDateTime departureTime,
+        String destination,
+        LocalDateTime destinationTime, 
         int contractId
     )
     {
@@ -30,6 +39,10 @@ public class Ticket {
         this.salePrice = salePrice; 
         this.saleDate = saleDate; 
         this.ticketStatus = ticketStatus;
+        this.departure = departure; 
+        this.departureTime = departureTime; 
+        this.destination = destination;
+        this.destinationTime = destinationTime; 
         this.contractId = contractId;
     }
 
@@ -37,7 +50,7 @@ public class Ticket {
      * Getters
      */
     
-     public int getId() {
+    public int getId() {
         return id;
     }
 
@@ -59,6 +72,22 @@ public class Ticket {
 
     public TicketStatus getTicketStatus() {
         return ticketStatus;
+    }
+
+    public String getDeparture() {
+        return departure;
+    }
+
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public LocalDateTime getDestinationTime() {
+        return destinationTime;
     }
 
     public int getContractId() {
@@ -89,6 +118,22 @@ public class Ticket {
         this.ticketStatus = ticketStatus;
     }
 
+    public void setDeparture(String departure) {
+        this.departure = departure;
+    }
+
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public void setDestinationTime(LocalDateTime destinationTime) {
+        this.destinationTime = destinationTime;
+    }
+
     public void setContractId(int contractId) {
         this.contractId = contractId;
     }
@@ -106,6 +151,10 @@ public class Ticket {
                 ", salePrice=" + salePrice +
                 ", saleDate=" + saleDate +
                 ", ticketStatus=" + ticketStatus +
+                ", departure=" + departure +
+                ", departureTime=" + departureTime +
+                ", destination=" + destination +
+                ", destinationTime=" + destinationTime +
                 '}';
     }
 }

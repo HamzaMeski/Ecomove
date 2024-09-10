@@ -23,8 +23,16 @@ public class ContractMenu {
     ContractView view = new ContractView();
     ContractController contractController = new ContractController(model, view);
 
+    PartnerDAO partnerModel = new PartnerDAO();
+    PartnerView partnerView = new PartnerView();
+    PartnerController partnerController = new PartnerController(partnerModel, partnerView);
+    List<Partner> partners = partnerController.listAllPartners();
+
     public static void displayMenu() {
         ContractMenu contractMenu = new ContractMenu();
+
+        if(contractMenu.partners.size() == 0) return;
+        
         byte option;
         do {
             System.out.println("\n");
@@ -63,11 +71,6 @@ public class ContractMenu {
     }
 
     int getPartnerId() {
-        PartnerDAO model = new PartnerDAO();
-        PartnerView view = new PartnerView();
-        PartnerController partnerController = new PartnerController(model, view);
-        List<Partner> partners = partnerController.listAllPartners();
-
         boolean idExists;
         int enteredPartnerId;
         do {
@@ -85,12 +88,13 @@ public class ContractMenu {
         return enteredPartnerId;
     }
  
-    public void addContract(int PartnerId) {
+    public void addContract(int PartnerId) {  
         System.out.println("||||||||||||||||||| ADD CONTRACT |||||||||||||||||||");
         /*
             Assigning contract to partner  
         */
         int enteredPartnerId = PartnerId;
+        // I am using this condition here because I will pass the ID of the partner automatically when inserting a partner
         if(PartnerId == 0) {
             enteredPartnerId = getPartnerId();
         }
@@ -112,17 +116,19 @@ public class ContractMenu {
                 checker = true;
             }
         }while(checker);
-
+ 
         /*
             setting endTime 
         */ 
         LocalDate endDate = null;
         do {
             try {
-                System.out.print("\n    >>Set end date (dd/MM/yy) (ex: 01/02/2024)= ");
+                System.out.print("\n    >>Set end date, must be after start data (dd/MM/yy) (ex: 01/02/2024)= ");
                 String dateString = ScanInput.scanner.nextLine();
                 endDate = LocalDate.parse(dateString, formatter);
-                checker = false;
+
+                if(endDate.isAfter(startDate)) checker = false;
+                else checker = true;
             }catch(DateTimeParseException e) {
                 System.out.print("\n        !! Invalid date pattern !!");
                 checker = true;

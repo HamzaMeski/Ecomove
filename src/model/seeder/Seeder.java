@@ -57,16 +57,38 @@ public class Seeder {
                 "transport_type VARCHAR(50) CHECK (transport_type IN ('PLANE', 'TRAIN', 'BUS')), " +
                 "purchase_price DECIMAL(10, 2) NOT NULL, " + 
                 "sale_price DECIMAL(10, 2) NOT NULL, " + 
-                "sale_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, " +
+                "sale_date TIMESTAMP, " +
                 "status VARCHAR(50) CHECK (status IN ('SOLD', 'CANCELED', 'PENDING')), " +
+                "departure VARCHAR(50), "+
+                "departure_time TIMESTAMP, "+
+                "destination VARCHAR(50), "+
+                "destination_time TIMESTAMP, "+
                 "contract_id INTEGER REFERENCES Contract(id)" + 
             ")";
-            
+
+            String createAdminTable = "CREATE TABLE IF NOT EXISTS Admin (" + 
+                "id SERIAL PRIMARY KEY, " + 
+                "first_name VARCHAR(255) NOT NULL, " +
+                "second_name VARCHAR(255) NOT NULL, " +
+                "phone_number VARCHAR(255) NOT NULL, " +
+                "email VARCHAR(255) NOT NULL " +
+            ")";
+
+            String createClientTable = "CREATE TABLE IF NOT EXISTS Client (" + 
+                "id SERIAL PRIMARY KEY, " + 
+                "first_name VARCHAR(255) NOT NULL, " +
+                "second_name VARCHAR(255) NOT NULL, " +
+                "phone_number VARCHAR(255) NOT NULL, " +
+                "email VARCHAR(255) NOT NULL " +
+            ")";
+
             statement.execute(createPartnerTable);
             statement.execute(createContractTable);
             statement.execute(createPromotionalOfferTable);
             statement.execute(createTicketTable);
-            
+            statement.execute(createAdminTable);
+            statement.execute(createClientTable);
+
             System.out.println("Database seeded successfully.");
         } catch (SQLException e) {
             System.err.println("Error during database seeding: " + e.getMessage());
