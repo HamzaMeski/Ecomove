@@ -27,7 +27,7 @@ public class ContractController {
 
     public List<Contract> listAllContracts() {
         List<Contract> contracts = model.listAllContracts();
-        view.listAllContracts(contracts);
-        return contracts;
+        List<Contract> partnerContracts = view.listAllContracts(contracts);
+        return partnerContracts;
     }
 }

@@ -83,7 +83,6 @@ public class ContractDAO {
         }
         
         if (counter == 0) {
-            // No fields to update
             return;
         }
 

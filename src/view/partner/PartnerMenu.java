@@ -192,7 +192,7 @@ public class PartnerMenu {
             } else{
                 companyName = null;
             }
-    
+
             String commercialContact;
             if(userOptions.contains(2)){
                 System.out.print("\n        *Set the commercial contact: ");

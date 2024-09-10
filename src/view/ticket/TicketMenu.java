@@ -1,6 +1,7 @@
 package view.ticket;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
@@ -23,8 +24,16 @@ public class TicketMenu {
     TicketView view = new TicketView();
     TicketController ticketController = new TicketController(model, view);
 
+    ContractDAO contractModel = new ContractDAO();
+    ContractView contractView = new ContractView();
+    ContractController contractController = new ContractController(contractModel, contractView);
+    List<Contract> partnerContracts = contractController.listAllContracts();
+
     public static void displayMenu() {
         TicketMenu ticketMenu = new TicketMenu();
+
+        if(ticketMenu.partnerContracts.size() == 0) return;
+        
         byte option;
         do {
             System.out.println("\n");
@@ -60,11 +69,6 @@ public class TicketMenu {
     }
 
     int getContractId() {
-        ContractDAO model = new ContractDAO();
-        ContractView view = new ContractView();
-        ContractController contractController = new ContractController(model, view);
-        List<Contract> contracts = contractController.listAllContracts();
-
         boolean idExists;
         int enteredContractId;
         do {
@@ -72,10 +76,10 @@ public class TicketMenu {
             int enteredId = ScanInput.scanner.nextInt();
             enteredContractId = enteredId;
             ScanInput.scanner.nextLine();
-            idExists = contracts.stream().anyMatch(contract -> contract.getId() == enteredId);
+            idExists = partnerContracts.stream().anyMatch(contract -> contract.getId() == enteredId);
             
             if (!idExists) {
-                System.out.println("        The entered ID does not exist. Please try again!");
+                System.out.println("      The entered ID does not exist. Please try again!");
             }
         } while (!idExists);
 
@@ -84,7 +88,6 @@ public class TicketMenu {
 
     void addTicket() {
         System.out.println("||||||||||||||||||| ADD TICKET |||||||||||||||||||");
-
         int enteredContractId = getContractId();
 
         TransportType transportType = getTransportType();
@@ -97,11 +100,18 @@ public class TicketMenu {
         Float salePrice = ScanInput.scanner.nextFloat();
         ScanInput.scanner.nextLine();
 
-        LocalDate saleDate = getSaleDate();
-
         TicketStatus ticketStatus = getTicketStatus();
+         
+        String departure = getDeparture();
+         
+        LocalDateTime departureTime = getDepartureTime(); 
 
-        Ticket ticket = new Ticket(0, transportType, purchasePrice, salePrice, saleDate, ticketStatus, enteredContractId);
+        String destination = getDestination(); 
+
+        LocalDateTime destinationTime = getDestinationTime();
+
+        Ticket ticket = new Ticket(0, transportType, purchasePrice, salePrice, null, ticketStatus, departure, departureTime, destination, destinationTime, enteredContractId);
+
         ticketController.addTicket(ticket);
     }
 
@@ -134,17 +144,34 @@ public class TicketMenu {
                 ScanInput.scanner.nextLine();
             }
 
-            LocalDate saleDate = null;
-            if (userOptions.contains(4)) {
-                saleDate = getSaleDate();
-            }
-
             TicketStatus ticketStatus = null;
-            if (userOptions.contains(5)) {
+            if (userOptions.contains(4)) {
                 ticketStatus = getTicketStatus();
             }
 
-            Ticket ticket = new Ticket(ticketId, transportType, purchasePrice, salePrice, saleDate, ticketStatus, 0);
+            String departure = null;
+            if(userOptions.contains(5)) {
+                System.out.println("\n      >>Set departure= ");
+                departure = getDeparture();
+            }
+
+            LocalDateTime departureTime = null; 
+            if(userOptions.contains(6)) {
+                departureTime = getDepartureTime();
+            }
+             
+            String destination = null;
+            if(userOptions.contains(5)) {
+                System.out.println("\n      >>Set departure= ");
+                departure = getDeparture();
+            }
+
+            LocalDateTime destinationTime = null; 
+            if(userOptions.contains(6)) {
+                destinationTime = getDestinationTime();
+            }
+
+            Ticket ticket = new Ticket(ticketId, transportType, purchasePrice, salePrice, null, ticketStatus, departure, departureTime, destination, destinationTime, 0);
             ticketController.updateTicket(ticket);
         }
     }
@@ -165,24 +192,6 @@ public class TicketMenu {
         return TransportType.valueOf(transportTypeValue);
     }
 
-    private LocalDate getSaleDate() {
-        LocalDate saleDate = null;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        boolean checker;
-        do {
-            try {
-                System.out.print("\n    >>Set sale date (dd/MM/yyyy) (ex: 01/02/2024)= ");
-                String dateString = ScanInput.scanner.nextLine();
-                saleDate = LocalDate.parse(dateString, formatter);
-                checker = false;
-            } catch (DateTimeParseException e) {
-                System.out.print("\n        !! Invalid date pattern !!");
-                checker = true;
-            }
-        } while (checker);
-        return saleDate;
-    }
-
     private TicketStatus getTicketStatus() {
         String ticketStatusValue;
         byte ticketStatusOption;
@@ -199,6 +208,51 @@ public class TicketMenu {
         return TicketStatus.valueOf(ticketStatusValue);
     }
 
+    private String getDeparture() {
+        System.out.print("\n      >>Set departure= ");
+        return ScanInput.scanner.nextLine();
+    }
+
+    private LocalDateTime getDepartureTime() {
+        LocalDateTime departureTime = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        boolean checker;
+        do {
+            try {
+                System.out.print("\n    >>Set sale date (dd/MM/yyyy HH:mm) (ex: 01/02/2024 13:22)= ");
+                String dateString = ScanInput.scanner.nextLine();
+                departureTime = LocalDateTime.parse(dateString, formatter);
+                checker = false;
+            } catch (DateTimeParseException e) {
+                System.out.print("\n        !! Invalid date pattern !!");
+                checker = true;
+            }
+        } while (checker);
+        return departureTime;
+    }
+
+    private String getDestination() {
+        System.out.print("\n      >>Set destination= ");
+        return ScanInput.scanner.nextLine();
+    }
+
+    private LocalDateTime getDestinationTime() {
+        LocalDateTime destinationTime = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        boolean checker;
+        do {
+            try {
+                System.out.print("\n    >>Set sale date (dd/MM/yyyy HH:mm) (ex: 01/02/2024 13:22)= ");
+                String dateString = ScanInput.scanner.nextLine();
+                destinationTime = LocalDateTime.parse(dateString, formatter);
+                checker = false;
+            } catch (DateTimeParseException e) {
+                System.out.print("\n        !! Invalid date pattern !!");
+                checker = true;
+            }
+        } while (checker);
+        return destinationTime;
+    }
     private int getTicketId(List<Ticket> tickets) {
         boolean ticketIdExist;
         int enteredTicketId;
@@ -221,13 +275,16 @@ public class TicketMenu {
         System.out.println("        (1)>>transport_type. ");
         System.out.println("        (2)>>purchase_price. ");
         System.out.println("        (3)>>sale_price. ");
-        System.out.println("        (4)>>sale_date. ");
-        System.out.println("        (5)>>status ('SOLD', 'CANCELED', 'PENDING') ");
-        System.out.println("        >>Done setting columns (6).");
-        
-        System.out.println("        <>Set an option that you want to update in the ticket (1-6):");
+        System.out.println("        (4)>>status ('SOLD', 'CANCELED', 'PENDING')");
+        System.out.println("        (5)>>departure  ");
+        System.out.println("        (6)>>departure_time  ");
+        System.out.println("        (7)>>destination ");
+        System.out.println("        (8)>>destination_time  ");
+        System.out.println("        >>Done setting columns (9).");
 
-        List<Integer> optionsSets = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
+        System.out.println("        <>Set an option that you want to update in the ticket (1-9):");
+
+        List<Integer> optionsSets = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9));
         List<Integer> userOptions = new ArrayList<>();
         int option;
         do {
@@ -237,10 +294,10 @@ public class TicketMenu {
             if (!optionsSets.contains(option)) {
                 System.out.print("\n        The value that you did set is not an option, set only the existing options: ");
             }
-            if (!(option == 6) && optionsSets.contains(option)) {
+            if (!(option == 9) && optionsSets.contains(option)) {
                 userOptions.add(option);
             }
-        } while (option != 6);
+        } while (option != 9);
 
         return userOptions;
     }

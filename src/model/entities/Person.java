@@ -4,7 +4,7 @@ public class Person {
     protected int id;
     protected String firstName;
     protected String secondName;
-    protected String phoneNumber; 
+    protected String phoneNumber;
     protected String email;
 
     public Person(int id, String firstName, String secondName, String phoneNumber, String email) {

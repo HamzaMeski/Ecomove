@@ -23,8 +23,16 @@ public class PromotionalOfferMenu {
     PromotionalOfferView view = new PromotionalOfferView();
     PromotionalOfferController promotionalOfferController = new PromotionalOfferController(model, view);
 
+    ContractDAO contractModel = new ContractDAO();
+    ContractView contractView = new ContractView();
+    ContractController contractController = new ContractController(contractModel, contractView);
+    List<Contract> partnerContracts = contractController.listAllContracts();
+
     public static void displayMenu() {
         PromotionalOfferMenu promotionalOfferMenu = new PromotionalOfferMenu();
+        
+        if(promotionalOfferMenu.partnerContracts.size() == 0) return;
+        
         byte option;
         do {
             System.out.println("\n");
@@ -62,11 +70,6 @@ public class PromotionalOfferMenu {
     }
 
     int getContractId() {
-        ContractDAO model = new ContractDAO();
-        ContractView view = new ContractView();
-        ContractController contractController = new ContractController(model, view);
-        List<Contract> contracts = contractController.listAllContracts();
-
         boolean idExists;
         int enteredContractId;
         do {
@@ -74,7 +77,7 @@ public class PromotionalOfferMenu {
             int enteredId = ScanInput.scanner.nextInt();
             enteredContractId = enteredId;
             ScanInput.scanner.nextLine();
-            idExists = contracts.stream().anyMatch(contract -> contract.getId() == enteredId);
+            idExists = partnerContracts.stream().anyMatch(contract -> contract.getId() == enteredId);
             
             if (!idExists) {
                 System.out.println("        The entered ID does not exist. Please try again!");

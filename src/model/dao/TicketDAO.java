@@ -17,7 +17,7 @@ public class TicketDAO {
         System.out.println(ticket);
         System.out.println("##########??");
         
-        String sql = "INSERT INTO Ticket (transport_type, purchase_price, sale_price, sale_date, status, contract_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Ticket (transport_type, purchase_price, sale_price, sale_date, status, departure, departure_time, destination, destination_time, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         try (Connection conn = DbConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -26,9 +26,13 @@ public class TicketDAO {
             stmt.setString(1, ticket.getTransportType().toString().toUpperCase());
             stmt.setFloat(2, ticket.getPurchasePrice());
             stmt.setFloat(3, ticket.getSalePrice());
-            stmt.setDate(4, Date.valueOf(ticket.getSaleDate()));
+            stmt.setDate(4, null);
             stmt.setString(5, ticket.getTicketStatus().toString().toUpperCase());
-            stmt.setInt(6, ticket.getContractId());
+            stmt.setString(6, ticket.getDeparture());
+            stmt.setTimestamp(7, Timestamp.valueOf(ticket.getDepartureTime()));
+            stmt.setString(8, ticket.getDestination());
+            stmt.setTimestamp(9, Timestamp.valueOf(ticket.getDestinationTime()));
+            stmt.setInt(10, ticket.getContractId());
 
             // Execute the insert statement
             stmt.executeUpdate();
@@ -62,7 +66,23 @@ public class TicketDAO {
             sqlColumns.add("status = ?");
             counter++;
         }
-
+        if (ticket.getDeparture() != null) {
+            sqlColumns.add("departure = ?");
+            counter++;
+        }
+        if (ticket.getDepartureTime() != null) {
+            sqlColumns.add("departure_time = ?");
+            counter++;
+        }
+        if (ticket.getDestination() != null) {
+            sqlColumns.add("destination = ?");
+            counter++;
+        }
+        if (ticket.getDestinationTime() != null) {
+            sqlColumns.add("destination_time = ?");
+            counter++;
+        }
+        
         if (counter == 0) {
             return;
         }
@@ -91,7 +111,18 @@ public class TicketDAO {
             if (ticket.getTicketStatus() != null) {
                 stmt.setString(parameterIndex++, ticket.getTicketStatus().toString());
             }
-
+            if (ticket.getDeparture() != null) {
+                stmt.setString(parameterIndex++, ticket.getDeparture());
+            }
+            if (ticket.getDepartureTime() != null) {
+                stmt.setTimestamp(parameterIndex++, Timestamp.valueOf(ticket.getDepartureTime()));
+            }
+            if (ticket.getDestination() != null) {
+                stmt.setString(parameterIndex++, ticket.getDestination());
+            }
+            if (ticket.getDestinationTime() != null) {
+                stmt.setTimestamp(parameterIndex++, Timestamp.valueOf(ticket.getDestinationTime()));
+            }
             // Set the ID for the WHERE clause
             stmt.setInt(parameterIndex, ticket.getId());
 
@@ -114,8 +145,12 @@ public class TicketDAO {
                     TransportType.valueOf(rs.getString("transport_type")),
                     rs.getFloat("purchase_price"),
                     rs.getFloat("sale_price"),
-                    rs.getDate("sale_date").toLocalDate(),
+                    rs.getDate("sale_date") != null ? rs.getDate("sale_date").toLocalDate(): null,
                     TicketStatus.valueOf(rs.getString("status")),
+                    rs.getString("departure"),
+                    rs.getTimestamp("departure_time").toLocalDateTime(),
+                    rs.getString("destination"),
+                    rs.getTimestamp("destination_time").toLocalDateTime(),
                     rs.getInt("contract_id")
                 );
                 tickets.add(ticket);
