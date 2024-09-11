@@ -58,7 +58,7 @@ public class Main {
                 case 5: 
                     ClientMenu.displayMenu();
                 break;
-                
+
                 case 6: 
                     ReservationMenu.displayMenu();
                 break;

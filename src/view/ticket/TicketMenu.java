@@ -100,7 +100,7 @@ public class TicketMenu {
         Float salePrice = ScanInput.scanner.nextFloat();
         ScanInput.scanner.nextLine();
 
-        TicketStatus ticketStatus = getTicketStatus();
+        TicketStatus ticketStatus = TicketStatus.PENDING;
          
         String departure = getDeparture();
          
@@ -144,10 +144,6 @@ public class TicketMenu {
                 ScanInput.scanner.nextLine();
             }
 
-            TicketStatus ticketStatus = null;
-            if (userOptions.contains(4)) {
-                ticketStatus = getTicketStatus();
-            }
 
             String departure = null;
             if(userOptions.contains(5)) {
@@ -171,7 +167,7 @@ public class TicketMenu {
                 destinationTime = getDestinationTime();
             }
 
-            Ticket ticket = new Ticket(ticketId, transportType, purchasePrice, salePrice, null, ticketStatus, departure, departureTime, destination, destinationTime, 0);
+            Ticket ticket = new Ticket(ticketId, transportType, purchasePrice, salePrice, null, null, departure, departureTime, destination, destinationTime, 0);
             ticketController.updateTicket(ticket);
         }
     }
