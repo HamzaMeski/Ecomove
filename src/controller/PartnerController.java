@@ -3,16 +3,13 @@ package controller;
 import model.entities.Partner;
 import model.dao.PartnerDAO;
 import view.partner.PartnerView;
-import lib.ScanInput;
- 
 
-import java.util.List; 
-import java.util.ArrayList; 
+import java.util.List;
 
 public class PartnerController {
     private PartnerDAO model;
     private PartnerView view;
-     
+
     public PartnerController(PartnerDAO model, PartnerView view) {
         this.model = model; 
         this.view = view;

@@ -15,7 +15,7 @@ public class PartnerDAO {
     public int addPartner(Partner partner) {
         String sql = "INSERT INTO partner (name, contact_name, transport_type, geographic_area, special_conditions, status, creation_date) VALUES (?, ?, ?, ?, ?, ?, ?)";
         int generatedId = -1;  // Default value to indicate no ID has been generated
-    
+
         try (Connection conn = DbConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
     

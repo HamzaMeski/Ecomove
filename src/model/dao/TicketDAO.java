@@ -13,14 +13,12 @@ import java.time.LocalDate;
 
 public class TicketDAO {
     public void addTicket(Ticket ticket) {
-        System.out.println("##########??");
-        System.out.println(ticket);
-        System.out.println("##########??");
-        
         String sql = "INSERT INTO Ticket (transport_type, purchase_price, sale_price, sale_date, status, departure, departure_time, destination, destination_time, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
-        try (Connection conn = DbConfig.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (
+                Connection conn = DbConfig.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)
+            ) {
 
             // Set all the parameters for the PreparedStatement
             stmt.setString(1, ticket.getTransportType().toString().toUpperCase());
