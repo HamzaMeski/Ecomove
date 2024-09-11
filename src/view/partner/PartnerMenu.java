@@ -9,9 +9,6 @@ import view.contract.ContractMenu;
 import lib.ScanInput;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -20,8 +17,6 @@ public class PartnerMenu {
     PartnerDAO model = new PartnerDAO(); 
     PartnerView view = new PartnerView();
     PartnerController partnerController = new PartnerController(model, view);
-
-    
 
     public static void displayMenu() {
         PartnerMenu partnerMenu = new PartnerMenu();

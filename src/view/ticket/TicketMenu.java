@@ -33,7 +33,7 @@ public class TicketMenu {
         TicketMenu ticketMenu = new TicketMenu();
 
         if(ticketMenu.partnerContracts.size() == 0) return;
-        
+
         byte option;
         do {
             System.out.println("\n");
