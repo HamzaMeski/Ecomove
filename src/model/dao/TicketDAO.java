@@ -9,36 +9,60 @@ import model.enums.TransportType;
 import model.enums.TicketStatus;
 
 import java.sql.*;
-import java.time.LocalDate;
 
 public class TicketDAO {
     public void addTicket(Ticket ticket) {
-        String sql = "INSERT INTO Ticket (transport_type, purchase_price, sale_price, sale_date, status, departure, departure_time, destination, destination_time, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
+        String ticketSql = "INSERT INTO Ticket (transport_type, purchase_price, sale_price, sale_date, status, departure, departure_time, destination, destination_time, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+        String vertixe1Sql = "INSERT INTO vertixe1 (departure, departure_time) VALUES (?, ?) RETURNING id";
+    
+        String vertixe2Sql = "INSERT INTO vertixe2 (vertixe1_id, destination, destination_time, ticket_id) VALUES (?, ?, ?, ?)";
+    
         try (
-                Connection conn = DbConfig.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql)
-            ) {
-
-            // Set all the parameters for the PreparedStatement
-            stmt.setString(1, ticket.getTransportType().toString().toUpperCase());
-            stmt.setFloat(2, ticket.getPurchasePrice());
-            stmt.setFloat(3, ticket.getSalePrice());
-            stmt.setDate(4, null);
-            stmt.setString(5, ticket.getTicketStatus().toString().toUpperCase());
-            stmt.setString(6, ticket.getDeparture());
-            stmt.setTimestamp(7, Timestamp.valueOf(ticket.getDepartureTime()));
-            stmt.setString(8, ticket.getDestination());
-            stmt.setTimestamp(9, Timestamp.valueOf(ticket.getDestinationTime()));
-            stmt.setInt(10, ticket.getContractId());
-
-            // Execute the insert statement
-            stmt.executeUpdate();
-
+            Connection conn = DbConfig.getConnection();
+            PreparedStatement ticketStmt = conn.prepareStatement(ticketSql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement vertixe1Stmt = conn.prepareStatement(vertixe1Sql);
+            PreparedStatement vertixe2Stmt = conn.prepareStatement(vertixe2Sql)
+        ) {
+            vertixe1Stmt.setString(1, ticket.getDeparture());
+            vertixe1Stmt.setTimestamp(2, Timestamp.valueOf(ticket.getDepartureTime()));
+            ResultSet vertixe1Rs = vertixe1Stmt.executeQuery();
+    
+            int vertixe1Id = 0;
+            if (vertixe1Rs.next()) {
+                vertixe1Id = vertixe1Rs.getInt(1); 
+            }
+    
+            ticketStmt.setString(1, ticket.getTransportType().toString().toUpperCase());
+            ticketStmt.setFloat(2, ticket.getPurchasePrice());
+            ticketStmt.setFloat(3, ticket.getSalePrice());
+            ticketStmt.setDate(4, null);
+            ticketStmt.setString(5, ticket.getTicketStatus().toString().toUpperCase());
+            ticketStmt.setString(6, ticket.getDeparture());
+            ticketStmt.setTimestamp(7, Timestamp.valueOf(ticket.getDepartureTime()));
+            ticketStmt.setString(8, ticket.getDestination());
+            ticketStmt.setTimestamp(9, Timestamp.valueOf(ticket.getDestinationTime()));
+            ticketStmt.setInt(10, ticket.getContractId());
+    
+            ticketStmt.executeUpdate();
+            ResultSet ticketRs = ticketStmt.getGeneratedKeys();
+    
+            int ticketId = 0;
+            if (ticketRs.next()) {
+                ticketId = ticketRs.getInt(1); 
+            }
+    
+            vertixe2Stmt.setInt(1, vertixe1Id); 
+            vertixe2Stmt.setString(2, ticket.getDestination());
+            vertixe2Stmt.setTimestamp(3, Timestamp.valueOf(ticket.getDestinationTime()));
+            vertixe2Stmt.setInt(4, ticketId); 
+    
+            vertixe2Stmt.executeUpdate();
+    
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    }    
 
     public void updateTicket(Ticket ticket) {
         List<String> sqlColumns = new ArrayList<>();

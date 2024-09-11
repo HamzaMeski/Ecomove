@@ -215,7 +215,7 @@ public class TicketMenu {
         boolean checker;
         do {
             try {
-                System.out.print("\n    >>Set sale date (dd/MM/yyyy HH:mm) (ex: 01/02/2024 13:22)= ");
+                System.out.print("\n    >>Set Departure time (dd/MM/yyyy HH:mm) (ex: 01/02/2024 13:22)= ");
                 String dateString = ScanInput.scanner.nextLine();
                 departureTime = LocalDateTime.parse(dateString, formatter);
                 checker = false;
@@ -238,7 +238,7 @@ public class TicketMenu {
         boolean checker;
         do {
             try {
-                System.out.print("\n    >>Set sale date (dd/MM/yyyy HH:mm) (ex: 01/02/2024 13:22)= ");
+                System.out.print("\n    >>Set Destination time (dd/MM/yyyy HH:mm) (ex: 01/02/2024 13:22)= ");
                 String dateString = ScanInput.scanner.nextLine();
                 destinationTime = LocalDateTime.parse(dateString, formatter);
                 checker = false;
