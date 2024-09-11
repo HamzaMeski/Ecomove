@@ -110,8 +110,6 @@ public class ClientDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        // System.out.println("hi hamza");
-        // System.out.println(clients);
         return clients;
     }
 }

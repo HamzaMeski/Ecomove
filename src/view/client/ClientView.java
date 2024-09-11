@@ -2,7 +2,6 @@ package view.client;
 
 import model.entities.Client;
 import java.util.List;
-import java.util.ArrayList;
 
 public class ClientView {
     public void displayAddClientMessage() {
@@ -24,8 +23,6 @@ public class ClientView {
             System.out.print("\n  * second name: "+      client.getSecondName());
             System.out.print("\n  * phone number: "+      client.getPhoneNumber());
             System.out.print("\n  * email: "+      client.getEmail());         
-            System.out.println("\n════════════════════════════════════════════════════════════════");
-            System.out.println();
         }
     }
 }

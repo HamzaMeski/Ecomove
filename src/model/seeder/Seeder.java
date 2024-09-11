@@ -82,12 +82,32 @@ public class Seeder {
                 "email VARCHAR(255) NOT NULL " +
             ")";
 
+            // GRAPH CITIES NETWORK TABLES
+            String createVertixe1Table = "CREATE TABLE vertixe1 (" +
+                "id SERIAL PRIMARY KEY, " +
+                "departure VARCHAR(255) NOT NULL, " +
+                "departure_time TIMESTAMP NOT NULL " +
+            ")";
+
+            String createVertixe2Table = "CREATE TABLE vertixe2 (" +
+                "id SERIAL PRIMARY KEY, " +
+                "vertixe1_id INT NOT NULL, " +
+                "destination VARCHAR(255) NOT NULL, " +
+                "destination_time TIMESTAMP NOT NULL, " +
+                "ticket_id INT NOT NULL, " +
+                "FOREIGN KEY (vertixe1_id) REFERENCES vertixe1(id), " +
+                "FOREIGN KEY (ticket_id) REFERENCES Ticket(id) " +
+            ")";
+
             statement.execute(createPartnerTable);
             statement.execute(createContractTable);
             statement.execute(createPromotionalOfferTable);
             statement.execute(createTicketTable);
             statement.execute(createAdminTable);
             statement.execute(createClientTable);
+            // EXECURE GRAPH TABLES
+            statement.execute(createVertixe1Table);
+            statement.execute(createVertixe2Table);
 
             System.out.println("Database seeded successfully.");
         } catch (SQLException e) {
