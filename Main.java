@@ -65,9 +65,10 @@ public class Main {
                 case 6: 
                     // ReservationMenu.displayMenu();
                     GraphSearch graphSearch = new GraphSearch();
-                    // graphSearch.getJourney("SAFI", "HUSSAIMA");
-                    graphSearch.getJourney("HUSSAIMA", "SAFI");
-                break;
+                    // graphSearch.getJourney("SAFI", "CASA");
+                    // graphSearch.getJourney("SAFI", "FES");
+                    graphSearch.getJourney("CASA", "FES");
+                    break;
             }
         }while(option != 7);
     }

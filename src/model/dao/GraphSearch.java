@@ -3,8 +3,6 @@ package model.dao;
 import java.sql.*;
 import java.util.*;
 import model.DbConfig;
-import java.util.HashMap;
-import java.util.Map;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -58,11 +56,11 @@ public class GraphSearch {
         List<List<Ticket>> result = new ArrayList<>();
         List<Ticket> path = new ArrayList<>();
         Set<String> visited = new HashSet<>();
-        dfs(departure, destination, visited, path, result);
+        dfs(departure, destination, visited, path, result, null);
         return result;
     }
 
-    private void dfs(String current, String destination, Set<String> visited, List<Ticket> path, List<List<Ticket>> result) {
+    private void dfs(String current, String destination, Set<String> visited, List<Ticket> path, List<List<Ticket>> result, LocalDateTime lastDestinationTime) {
         visited.add(current);
 
         if (current.equals(destination)) {
@@ -72,9 +70,13 @@ public class GraphSearch {
             for (Map.Entry<String, Ticket> entry : neighbors.entrySet()) {
                 String neighbor = entry.getKey();
                 Ticket ticket = entry.getValue();
-                if (!visited.contains(neighbor)) {
+                LocalDateTime ticketDepartureTime = ticket.getDepartureTime();
+                LocalDateTime ticketDestinationTime = ticket.getDestinationTime();
+
+                if (!visited.contains(neighbor) &&
+                    (lastDestinationTime == null || !ticketDepartureTime.isBefore(lastDestinationTime))) {
                     path.add(ticket);
-                    dfs(neighbor, destination, visited, path, result);
+                    dfs(neighbor, destination, visited, path, result, ticketDestinationTime);
                     path.remove(path.size() - 1);
                 }
             }
@@ -88,7 +90,7 @@ public class GraphSearch {
         List<List<Ticket>> paths = graphSearch.findPaths(departure, destination);
 
         if (paths.isEmpty()) {
-            System.out.println ("No direct path found.");
+            System.out.println("No valid path found.");
         } else {
             System.out.println("Found paths:");
             for (List<Ticket> path : paths) {
