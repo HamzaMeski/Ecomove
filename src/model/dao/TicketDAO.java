@@ -13,11 +13,11 @@ import java.sql.*;
 public class TicketDAO {
     public void addTicket(Ticket ticket) {
         String ticketSql = "INSERT INTO Ticket (transport_type, purchase_price, sale_price, sale_date, status, departure, departure_time, destination, destination_time, contract_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
+
         String vertixe1Sql = "INSERT INTO vertixe1 (departure, departure_time) VALUES (?, ?) RETURNING id";
-    
+
         String vertixe2Sql = "INSERT INTO vertixe2 (vertixe1_id, destination, destination_time, ticket_id) VALUES (?, ?, ?, ?)";
-    
+
         try (
             Connection conn = DbConfig.getConnection();
             PreparedStatement ticketStmt = conn.prepareStatement(ticketSql, Statement.RETURN_GENERATED_KEYS);
@@ -182,4 +182,6 @@ public class TicketDAO {
         }
         return tickets;
     }
+
+    
 }
