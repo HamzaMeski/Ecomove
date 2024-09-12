@@ -22,12 +22,13 @@ public class GraphDAO {
                      "t.purchase_price, t.sale_price, t.sale_date, t.status, t.departure_time, t.destination_time, t.contract_id " +
                      "FROM vertixe1 v1 " +
                      "JOIN vertixe2 v2 ON v1.id = v2.vertixe1_id " +
-                     "JOIN Ticket t ON t.id = v2.ticket_id";
+                     "JOIN Ticket t ON t.id = v2.ticket_id " +
+                     "WHERE t.status = 'PENDING'";
 
         try (Connection conn = DbConfig.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-
+    
             while (rs.next()) {
                 String departure = rs.getString("departure");
                 String destination = rs.getString("destination");
@@ -40,18 +41,18 @@ public class GraphDAO {
                 LocalDateTime departureTime = rs.getObject("departure_time", LocalDateTime.class);
                 LocalDateTime destinationTime = rs.getObject("destination_time", LocalDateTime.class);
                 int contractId = rs.getInt("contract_id");
-
+    
                 Ticket ticket = new Ticket(ticketId, transportType, purchasePrice, salePrice, saleDate, ticketStatus,
                                            departure, departureTime, destination, destinationTime, contractId);
-
+    
                 citiesNetwork.computeIfAbsent(departure, k -> new HashMap<>()).put(destination, ticket);
             }
-
+    
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
+    
     public List<List<Ticket>> findPaths(String departure, String destination) {
         List<List<Ticket>> result = new ArrayList<>();
         List<Ticket> path = new ArrayList<>();
@@ -104,28 +105,35 @@ public class GraphDAO {
     
         String insertReservationSQL = "INSERT INTO reservation (ticket_id, client_id, reservation_time) VALUES (?, ?, ?)";
     
+        String updateTicketStatusSQL = "UPDATE Ticket SET status = 'SOLD' WHERE id = ?";
+    
         Connection conn = null; 
         try {
             conn = DbConfig.getConnection();
-            conn.setAutoCommit(false);  
+            conn.setAutoCommit(false);
     
             for (Ticket ticket : selectedJourney) {
                 try (PreparedStatement pstmt = conn.prepareStatement(insertReservationSQL)) {
-                    pstmt.setInt(1, ticket.getId());  
-                    pstmt.setInt(2, clientId);        
-                    pstmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));  
+                    pstmt.setInt(1, ticket.getId());
+                    pstmt.setInt(2, clientId);
+                    pstmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
+                    pstmt.executeUpdate();
+                }
+    
+                try (PreparedStatement pstmt = conn.prepareStatement(updateTicketStatusSQL)) {
+                    pstmt.setInt(1, ticket.getId()); 
                     pstmt.executeUpdate();
                 }
             }
     
-            conn.commit();  
-            System.out.println("Journey reserved and stored in the reservation table successfully!");
-
+            conn.commit(); 
+            System.out.println("Journey reserved, tickets updated to 'SOLD', and stored in the reservation table successfully!");
+    
         } catch (SQLException e) {
             e.printStackTrace();
             if (conn != null) {
                 try {
-                    conn.rollback();  
+                    conn.rollback();
                 } catch (SQLException rollbackEx) {
                     rollbackEx.printStackTrace();
                 }
@@ -133,7 +141,7 @@ public class GraphDAO {
         } finally {
             if (conn != null) {
                 try {
-                    conn.close();  
+                    conn.close();
                 } catch (SQLException closeEx) {
                     closeEx.printStackTrace();
                 }
