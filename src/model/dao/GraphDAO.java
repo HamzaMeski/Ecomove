@@ -10,10 +10,10 @@ import model.entities.Ticket;
 import model.enums.TransportType;
 import model.enums.TicketStatus;
 
-public class GraphSearch {
+public class GraphDAO {
     private Map<String, Map<String, Ticket>> citiesNetwork = new HashMap<>();
 
-    public GraphSearch() {
+    public GraphDAO() {
         loadGraphFromDatabase();
     }
 
@@ -84,9 +84,10 @@ public class GraphSearch {
 
         visited.remove(current);
     }
-
-    public void getJourney(String departure, String destination) {
-        GraphSearch graphSearch = new GraphSearch();
+    
+    /* 
+    public void searchJourney(String departure, String destination) {
+        GraphDAO graphSearch = new GraphDAO();
         List<List<Ticket>> paths = graphSearch.findPaths(departure, destination);
 
         if (paths.isEmpty()) {
@@ -97,5 +98,13 @@ public class GraphSearch {
                 System.out.println(path);
             }
         }
+    }
+    */
+    
+    public List<List<Ticket>> searchJourney(String departure, String destination) {
+        GraphDAO graphSearch = new GraphDAO();
+        List<List<Ticket>> paths = graphSearch.findPaths(departure, destination);
+        
+        return paths;
     }
 }

@@ -8,7 +8,7 @@ import view.reservation.ReservationMenu;
 import lib.ScanInput;
 
 // for testing purpose
-import model.dao.GraphSearch;
+import model.dao.GraphDAO;
 
 public class Main {
     public static void main(String[] args) {
@@ -64,10 +64,12 @@ public class Main {
 
                 case 6: 
                     // ReservationMenu.displayMenu();
-                    GraphSearch graphSearch = new GraphSearch();
+                    // GraphDAO graphSearch = new GraphDAO();
                     // graphSearch.getJourney("SAFI", "CASA");
                     // graphSearch.getJourney("SAFI", "FES");
-                    graphSearch.getJourney("CASA", "FES");
+                    // graphSearch.getJourney("CASA", "FES");
+
+                    ReservationMenu.displayMenu();
                     break;
             }
         }while(option != 7);
