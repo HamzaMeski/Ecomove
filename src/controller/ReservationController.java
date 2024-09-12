@@ -11,7 +11,7 @@ public class ReservationController {
     private ReservationView view;
     
     public ReservationController(GraphDAO model, ReservationView view) {
-        this.model = model; 
+        this.model = model;
         this.view = view;
     }
 
@@ -20,7 +20,7 @@ public class ReservationController {
         view.searchJourney(paths);
     }
 
-    public void reserveJourneyTickets() {
-
+    public void reserveJourneyTickets(String departure, String destination) {
+        model.reserveJourneyTickets(departure, destination, 1);
     }
 }

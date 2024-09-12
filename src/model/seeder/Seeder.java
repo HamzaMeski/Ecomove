@@ -99,6 +99,16 @@ public class Seeder {
                 "FOREIGN KEY (ticket_id) REFERENCES Ticket(id) " +
             ")";
 
+            // Create Reservation table
+            String createReservationTable = "CREATE TABLE reservation (" +
+                "id SERIAL PRIMARY KEY, " + 
+                "ticket_id INT NOT NULL, " +
+                "client_id INT NOT NULL, " +
+                "reservation_time TIMESTAMP NOT NULL, " +
+                "FOREIGN KEY (ticket_id) REFERENCES Ticket(id), " +
+                "FOREIGN KEY (client_id) REFERENCES Client(id) " +
+            ")";
+
             statement.execute(createPartnerTable);
             statement.execute(createContractTable);
             statement.execute(createPromotionalOfferTable);
@@ -108,6 +118,8 @@ public class Seeder {
             // EXECURE GRAPH TABLES
             statement.execute(createVertixe1Table);
             statement.execute(createVertixe2Table);
+            // EXECUTE RESERVATION TABLE
+            statement.execute(createReservationTable);
 
             System.out.println("Database seeded successfully.");
         } catch (SQLException e) {

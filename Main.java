@@ -63,12 +63,6 @@ public class Main {
                 break;
 
                 case 6: 
-                    // ReservationMenu.displayMenu();
-                    // GraphDAO graphSearch = new GraphDAO();
-                    // graphSearch.getJourney("SAFI", "CASA");
-                    // graphSearch.getJourney("SAFI", "FES");
-                    // graphSearch.getJourney("CASA", "FES");
-
                     ReservationMenu.displayMenu();
                     break;
             }
