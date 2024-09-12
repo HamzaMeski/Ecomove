@@ -1,7 +1,6 @@
 package view.reservation;
 
 import model.dao.GraphDAO;
-import view.ticket.TicketMenu;
 import controller.ReservationController;
 import model.dao.TicketDAO;
 import lib.ScanInput;
@@ -50,6 +49,7 @@ public class ReservationMenu {
     }
      
     void searchJourney() {
+        System.out.println("        <> SEARCH DESTINATION <>");
         System.out.print("        <1> Set Departure to go from: ");
         String departure = ScanInput.scanner.nextLine();
         System.out.print("\n        <2> Set The Destination: ");
@@ -59,6 +59,12 @@ public class ReservationMenu {
     }
 
     void reserveJourneyTickets() {
+        System.out.println("        <> RESERVE JOURNEY TICKETS <>");
+        System.out.print("        <1> Set Departure to go from: ");
+        String departure = ScanInput.scanner.nextLine();
+        System.out.print("\n        <2> Set The Destination: ");
+        String destination = ScanInput.scanner.nextLine();
 
+        reservationController.reserveJourneyTickets(departure, destination);
     }
 }

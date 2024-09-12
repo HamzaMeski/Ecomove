@@ -23,11 +23,11 @@ public class GraphDAO {
                      "FROM vertixe1 v1 " +
                      "JOIN vertixe2 v2 ON v1.id = v2.vertixe1_id " +
                      "JOIN Ticket t ON t.id = v2.ticket_id";
-        
+
         try (Connection conn = DbConfig.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
-            
+
             while (rs.next()) {
                 String departure = rs.getString("departure");
                 String destination = rs.getString("destination");
@@ -62,7 +62,7 @@ public class GraphDAO {
 
     private void dfs(String current, String destination, Set<String> visited, List<Ticket> path, List<List<Ticket>> result, LocalDateTime lastDestinationTime) {
         visited.add(current);
-
+    
         if (current.equals(destination)) {
             result.add(new ArrayList<>(path));
         } else {
@@ -84,27 +84,61 @@ public class GraphDAO {
 
         visited.remove(current);
     }
-    
-    /* 
-    public void searchJourney(String departure, String destination) {
-        GraphDAO graphSearch = new GraphDAO();
-        List<List<Ticket>> paths = graphSearch.findPaths(departure, destination);
 
-        if (paths.isEmpty()) {
-            System.out.println("No valid path found.");
-        } else {
-            System.out.println("Found paths:");
-            for (List<Ticket> path : paths) {
-                System.out.println(path);
-            }
-        }
-    }
-    */
-    
     public List<List<Ticket>> searchJourney(String departure, String destination) {
         GraphDAO graphSearch = new GraphDAO();
         List<List<Ticket>> paths = graphSearch.findPaths(departure, destination);
-        
+
         return paths;
     }
+
+    public void reserveJourneyTickets(String departure, String destination, int clientId) {
+        List<List<Ticket>> journeys = searchJourney(departure, destination);
+    
+        if (journeys.isEmpty()) {
+            System.out.println("No valid journey available for reservation.");
+            return;
+        }
+    
+        List<Ticket> selectedJourney = journeys.get(0);
+    
+        String insertReservationSQL = "INSERT INTO reservation (ticket_id, client_id, reservation_time) VALUES (?, ?, ?)";
+    
+        Connection conn = null; 
+        try {
+            conn = DbConfig.getConnection();
+            conn.setAutoCommit(false);  
+    
+            for (Ticket ticket : selectedJourney) {
+                try (PreparedStatement pstmt = conn.prepareStatement(insertReservationSQL)) {
+                    pstmt.setInt(1, ticket.getId());  
+                    pstmt.setInt(2, clientId);        
+                    pstmt.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));  
+                    pstmt.executeUpdate();
+                }
+            }
+    
+            conn.commit();  
+            System.out.println("Journey reserved and stored in the reservation table successfully!");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            if (conn != null) {
+                try {
+                    conn.rollback();  
+                } catch (SQLException rollbackEx) {
+                    rollbackEx.printStackTrace();
+                }
+            }
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();  
+                } catch (SQLException closeEx) {
+                    closeEx.printStackTrace();
+                }
+            }
+        }
+    }
+    
 }
