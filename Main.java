@@ -15,12 +15,16 @@ public class Main {
         Menus menus = new Menus();
         int option;
         do {
-            System.out.println("    [1] |- Log-in as an admin  :");
-            System.out.println("    [2] |- Sign-up as a client :");
-            System.out.println("    [3] |- Log-in as a client  :");
-            System.out.println("    [4] |- Exit program        :");
-            System.out.print("        >>SET OPTION: ");
-            
+            System.out.println("╔════════════════════════════════════════╗");
+            System.out.println("║               MAIN MENU                ║");
+            System.out.println("╠════════════════════════════════════════╣");
+            System.out.println("║    [1] |- Log-in as an admin           ║");
+            System.out.println("║    [2] |- Sign-up as a client          ║");
+            System.out.println("║    [3] |- Log-in as a client           ║");
+            System.out.println("║    [4] |- Exit program                 ║");
+            System.out.println("╚════════════════════════════════════════╝");
+            System.out.print("        >> SET OPTION: ");
+                
             option = ScanInput.scanner.nextInt();
             ScanInput.scanner.nextLine();
 
