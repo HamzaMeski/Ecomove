@@ -109,6 +109,12 @@ public class Seeder {
                 "FOREIGN KEY (client_id) REFERENCES Client(id) " +
             ")";
 
+            // Create User session table
+            String createUserSessionTable = "CREATE TABLE user_session (" +
+                "id SERIAL PRIMARY KEY, " +
+                "user_id INT NOT NULL " +
+            ")";
+
             statement.execute(createPartnerTable);
             statement.execute(createContractTable);
             statement.execute(createPromotionalOfferTable);
@@ -120,6 +126,8 @@ public class Seeder {
             statement.execute(createVertixe2Table);
             // EXECUTE RESERVATION TABLE
             statement.execute(createReservationTable);
+            // EXECUTE USER SESSION TABLE
+            statement.execute(createUserSessionTable);
 
             System.out.println("Database seeded successfully.");
         } catch (SQLException e) {

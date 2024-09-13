@@ -112,4 +112,9 @@ public class ClientDAO {
         }
         return clients;
     }
+
+    public Integer checkAccountInfo(String userName, String email) {
+        String sql = "SELECT * FROM Client WHERE first_name = 'hamza' AND second_name = 'meski'";
+        return null; 
+    }
 }

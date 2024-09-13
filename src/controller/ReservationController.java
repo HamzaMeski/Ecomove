@@ -9,7 +9,7 @@ import java.util.List;
 public class ReservationController {
     private GraphDAO model;
     private ReservationView view;
-    
+
     public ReservationController(GraphDAO model, ReservationView view) {
         this.model = model;
         this.view = view;
