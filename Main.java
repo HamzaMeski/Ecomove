@@ -1,15 +1,13 @@
 import view.partner.PartnerMenu;
+import view.reservation.ReservationMenu;
 import view.contract.ContractMenu; 
 import view.PromotionalOffer.PromotionalOfferMenu;
 import view.ticket.TicketMenu;
 import view.client.ClientMenu;
-import view.reservation.ReservationMenu;
 import controller.AuthenticationController;
 import model.dao.ClientDAO;
 import lib.ScanInput;
 
-import java.util.List; 
-import java.util.ArrayList;
 
 public class Main {
     
@@ -17,12 +15,16 @@ public class Main {
         Menus menus = new Menus();
         int option;
         do {
-            System.out.println("    [1] |- Log-in as an admin  :");
-            System.out.println("    [2] |- Sign-up as a client :");
-            System.out.println("    [3] |- Log-in as a client  :");
-            System.out.println("    [4] |- Exit program        :");
-            System.out.print("        >>SET OPTION: ");
-            
+            System.out.println("╔════════════════════════════════════════╗");
+            System.out.println("║               MAIN MENU                ║");
+            System.out.println("╠════════════════════════════════════════╣");
+            System.out.println("║    [1] |- Log-in as an admin           ║");
+            System.out.println("║    [2] |- Sign-up as a client          ║");
+            System.out.println("║    [3] |- Log-in as a client           ║");
+            System.out.println("║    [4] |- Exit program                 ║");
+            System.out.println("╚════════════════════════════════════════╝");
+            System.out.print("        >> SET OPTION: ");
+                
             option = ScanInput.scanner.nextInt();
             ScanInput.scanner.nextLine();
 
@@ -34,6 +36,7 @@ public class Main {
                     System.out.print("\n        #password:");
                     String password = ScanInput.scanner.nextLine();
 
+                    // the following is just for testing purposes :)
                     if(userName.equals("HM") && password.equals("HM")) menus.displayAdminMenu();
                     else System.out.println("       Wrong informations!");
                 break;
@@ -128,7 +131,7 @@ class Menus {
             ScanInput.scanner.nextLine();
             switch(option) {
                 case 1:
-                    PartnerMenu.displayMenu();
+                    ReservationMenu.displayMenu();
                 break;
             }
         }while(option != 7);
@@ -153,7 +156,7 @@ class Menus {
             ScanInput.scanner.nextLine();
             switch(option) {
                 case 1:
-                    PartnerMenu.displayMenu();
+                    ClientMenu.displayMenu();
                 break;
             }
         }while(option != 7);

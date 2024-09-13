@@ -5,7 +5,6 @@ import model.dao.ClientDAO;
 import view.client.ClientView;
 
 import java.util.List; 
-import java.util.ArrayList; 
 
 public class ClientController {
     private ClientDAO model;

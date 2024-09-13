@@ -1,6 +1,5 @@
 package controller; 
 import view.ticket.TicketView;
-import model.entities.PromotionalOffer;
 import model.entities.Ticket;
 import model.dao.TicketDAO;
 import java.util.List;
