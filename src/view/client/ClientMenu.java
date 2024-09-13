@@ -1,12 +1,6 @@
 package view.client;
 
 import model.dao.ClientDAO;
-import model.entities.Partner;
-import model.enums.PartnerStatus;
-import model.enums.TransportType;
-import src.view.partner.PartnerMenu;
-import view.client.ClientView;
-import view.contract.ContractMenu;
 import controller.ClientController;
 import lib.ScanInput;
 
@@ -44,7 +38,7 @@ public class ClientMenu {
             option = ScanInput.scanner.nextByte();
             ScanInput.scanner.nextLine();
 
-            String noClientMsg = "   There is no client for the momement!";
+            String noClientMsg = "   There is no client for the moment!";
             switch (option) {
                 case 1:
                     clientMenu.addClient();
@@ -93,8 +87,11 @@ public class ClientMenu {
 
         System.out.print("      # email: ");
         String email = ScanInput.scanner.nextLine();
+
+        System.out.print("      # password: ");
+        String password = ScanInput.scanner.nextLine();
         
-        Client client = new Client(0, firstName, secondName, phoneNumber, email);
+        Client client = new Client(0, firstName, secondName, phoneNumber, email, password);
         clientController.addClient(client);
     }
 
@@ -126,11 +123,12 @@ public class ClientMenu {
         System.out.println("        (2)>>second name. ");
         System.out.println("        (3)>>phone number. ");
         System.out.println("        (4)>>email. ");
-        System.out.println("        >>Done setting columns (5).");
-        
-        System.out.println("        <>Set an option that you want to update in the contract (1-5):");
+        System.out.println("        (5)>>password. ");
+        System.out.println("        >>Done setting columns (6).");
 
-        List<Integer> optionsSets = new ArrayList<>(List.of(1, 2, 3, 4, 5));
+        System.out.println("        <>Set an option that you want to update in the contract (1-6):");
+
+        List<Integer> optionsSets = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6));
         List<Integer> userOptions = new ArrayList<>();
         int option;
         do {
@@ -140,10 +138,10 @@ public class ClientMenu {
             if(!optionsSets.contains(option)) {
                 System.out.print("\n        The value that you did set is not an option, set only the existing options: ");
             }
-            if(!(option == 5) && optionsSets.contains(option)){
+            if(!(option == 6) && optionsSets.contains(option)){
                 userOptions.add(option);
             }
-        }while(option != 5);
+        }while(option != 6);
 
         String firstName = null;
         if(userOptions.contains(1)) {
@@ -165,7 +163,12 @@ public class ClientMenu {
             email = ScanInput.scanner.nextLine();
         }
 
-        Client client = new Client(0, firstName, secondName, phoneNumber, email);
+        String password = null;
+        if(userOptions.contains(5)) {
+            password = ScanInput.scanner.nextLine();
+        }
+
+        Client client = new Client(0, firstName, secondName, phoneNumber, email, password);
         clientController.updateClient(client);
     }
 

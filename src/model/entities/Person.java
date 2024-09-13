@@ -6,13 +6,15 @@ public class Person {
     protected String secondName;
     protected String phoneNumber;
     protected String email;
+    protected String password;
 
-    public Person(int id, String firstName, String secondName, String phoneNumber, String email) {
+    public Person(int id, String firstName, String secondName, String phoneNumber, String email, String password) {
         this.id = id; 
         this.firstName = firstName; 
         this.secondName = secondName; 
         this.phoneNumber = phoneNumber; 
         this.email = email;
+        this.password = password;
     }
 
     // Getters
@@ -36,6 +38,10 @@ public class Person {
         return email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     // Setters
     public void setId(int id) {
         this.id = id;
@@ -55,5 +61,9 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

@@ -1,15 +1,13 @@
 import view.partner.PartnerMenu;
+import view.reservation.ReservationMenu;
 import view.contract.ContractMenu; 
 import view.PromotionalOffer.PromotionalOfferMenu;
 import view.ticket.TicketMenu;
 import view.client.ClientMenu;
-import view.reservation.ReservationMenu;
 import controller.AuthenticationController;
 import model.dao.ClientDAO;
 import lib.ScanInput;
 
-import java.util.List; 
-import java.util.ArrayList;
 
 public class Main {
     
@@ -34,6 +32,7 @@ public class Main {
                     System.out.print("\n        #password:");
                     String password = ScanInput.scanner.nextLine();
 
+                    // the following is just for testing purposes :)
                     if(userName.equals("HM") && password.equals("HM")) menus.displayAdminMenu();
                     else System.out.println("       Wrong informations!");
                 break;
@@ -128,7 +127,7 @@ class Menus {
             ScanInput.scanner.nextLine();
             switch(option) {
                 case 1:
-                    PartnerMenu.displayMenu();
+                    ReservationMenu.displayMenu();
                 break;
             }
         }while(option != 7);
@@ -153,7 +152,7 @@ class Menus {
             ScanInput.scanner.nextLine();
             switch(option) {
                 case 1:
-                    PartnerMenu.displayMenu();
+                    ClientMenu.displayMenu();
                 break;
             }
         }while(option != 7);
