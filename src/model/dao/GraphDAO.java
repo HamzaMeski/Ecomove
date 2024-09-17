@@ -7,7 +7,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import model.entities.Ticket;
-import model.enums.TransportType;
 import model.enums.TicketStatus;
 
 public class GraphDAO {
