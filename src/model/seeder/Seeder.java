@@ -21,7 +21,7 @@ public class Seeder {
                 "id SERIAL PRIMARY KEY, " + 
                 "name VARCHAR(255) NOT NULL, " +
                 "contact_name VARCHAR(255), " +
-                "transport_type VARCHAR(50) CHECK (transport_type IN ('PLANE', 'TRAIN', 'BUS')), " +
+                "transport_type VARCHAR(50), " +
                 "geographic_area VARCHAR(255), " +
                 "special_conditions TEXT, " +
                 "status VARCHAR(50) CHECK (status IN ('ACTIVE', 'INACTIVE', 'SUSPENDED')), " +
@@ -54,7 +54,7 @@ public class Seeder {
             
             String createTicketTable = "CREATE TABLE IF NOT EXISTS Ticket (" +
                 "id SERIAL PRIMARY KEY, " + 
-                "transport_type VARCHAR(50) CHECK (transport_type IN ('PLANE', 'TRAIN', 'BUS')), " +
+                "transport_type VARCHAR(50), " +
                 "purchase_price DECIMAL(10, 2) NOT NULL, " + 
                 "sale_price DECIMAL(10, 2) NOT NULL, " + 
                 "sale_date TIMESTAMP, " +

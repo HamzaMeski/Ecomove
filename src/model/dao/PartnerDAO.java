@@ -149,7 +149,7 @@ public class PartnerDAO {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
                 String contactName = rs.getString("contact_name");
-                TransportType transportType = TransportType.valueOf(rs.getString("transport_type"));
+                String transportType = rs.getString("transport_type");
                 String geographicArea = rs.getString("geographic_area");
                 String specialConditions = rs.getString("special_conditions");
                 PartnerStatus status = PartnerStatus.valueOf(rs.getString("status"));
@@ -179,7 +179,7 @@ public class PartnerDAO {
                     rs.getInt("id"),
                     rs.getString("name"),
                     rs.getString("contact_name"),
-                    TransportType.valueOf(rs.getString("transport_type")),
+                    rs.getString("transport_type"),
                     rs.getString("geographic_area"),
                     rs.getString("special_conditions"),
                     PartnerStatus.valueOf(rs.getString("status")),

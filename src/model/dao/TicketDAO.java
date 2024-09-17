@@ -164,7 +164,7 @@ public class TicketDAO {
             while (rs.next()) {
                 Ticket ticket = new Ticket(
                     rs.getInt("id"),
-                    TransportType.valueOf(rs.getString("transport_type")),
+                    rs.getString("transport_type"),
                     rs.getFloat("purchase_price"),
                     rs.getFloat("sale_price"),
                     rs.getDate("sale_date") != null ? rs.getDate("sale_date").toLocalDate(): null,

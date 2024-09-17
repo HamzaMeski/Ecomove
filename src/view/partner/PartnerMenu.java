@@ -4,7 +4,6 @@ import controller.PartnerController;
 import model.dao.PartnerDAO;
 import model.entities.Partner;
 import model.enums.PartnerStatus;
-import model.enums.TransportType;
 import view.contract.ContractMenu;
 import lib.ScanInput;
 
@@ -84,19 +83,9 @@ public class PartnerMenu {
 
         /*
             setting transportTypeValue
-        */ 
-        String transportTypeValue;
-        byte transportTypeOption;
-        do {
-            System.out.print("\n    >>transport type (1.PLANE, 2.TRAIN, 3.BUS) ");
-            System.out.print("\n        <>set 1, 2 or 3 for an option= ");
-            transportTypeOption = ScanInput.scanner.nextByte(); 
-            ScanInput.scanner.nextLine();
-        } while(!(transportTypeOption == 1) && !(transportTypeOption == 2) && !(transportTypeOption == 3));
-        if(transportTypeOption == 1) transportTypeValue = "PLANE";
-        else if(transportTypeOption == 2) transportTypeValue = "TRAIN"; 
-        else transportTypeValue = "BUS";
-        TransportType transportType = TransportType.valueOf(transportTypeValue);
+        */
+        System.out.print("\n    >>transport type ex(PLANE, TRAIN, BUS ...) ");
+        String transportType = ScanInput.scanner.nextLine();
 
         /*
             setting geographicalArea 
@@ -180,57 +169,37 @@ public class PartnerMenu {
                 }
             }while(option != 7);
     
-            String companyName;
+            String companyName = null;
             if(userOptions.contains(1)) {
                 System.out.print("      *Set the company name: ");
                 companyName = ScanInput.scanner.nextLine();
-            } else{
-                companyName = null;
             }
 
-            String commercialContact;
+            String commercialContact = null;
             if(userOptions.contains(2)){
                 System.out.print("\n        *Set the commercial contact: ");
                 commercialContact = ScanInput.scanner.nextLine();
-            } else{
-                commercialContact = null;
-            }
-             
-            TransportType transportType;
+            } 
+
+            String transportType = null;
             if(userOptions.contains(3)){
-                String transportTypeValue;
-                byte transportTypeOption;
-                do {
-                    System.out.print("\n        *transport type (1.PLANE, 2.TRAIN, 3.BUS) ");
-                    System.out.print("\n            <>set 1, 2 or 3 for an option= ");
-                    transportTypeOption = ScanInput.scanner.nextByte(); 
-                    ScanInput.scanner.nextLine();
-                } while(!(transportTypeOption == 1) && !(transportTypeOption == 2) && !(transportTypeOption == 3));
-                if(transportTypeOption == 1) transportTypeValue = "PLANE";
-                else if(transportTypeOption == 2) transportTypeValue = "TRAIN"; 
-                else transportTypeValue = "BUS";
-                transportType = TransportType.valueOf(transportTypeValue);
-            } else{
-                transportType = null;
+                System.out.print("\n        *transport type (PLANE, TRAIN, BUS ...) ");
+                transportType = ScanInput.scanner.nextLine();
             }
-             
-            String geographicalArea;
+            
+            String geographicalArea = null;
             if(userOptions.contains(4)){
                 System.out.print("\n        *Set the geographical area: ");
                 geographicalArea = ScanInput.scanner.nextLine();
-            }else {
-                geographicalArea = null;
             }
             
-            String specialConditions;
+            String specialConditions = null;
             if(userOptions.contains(5)){
                 System.out.print("\n        *Set the special conditions: ");
                 specialConditions = ScanInput.scanner.nextLine();
-            }else {
-                specialConditions = null;
             }
     
-            PartnerStatus partnerStatus;
+            PartnerStatus partnerStatus = null;
             if(userOptions.contains(6)){
                 String partnerStatusValue;
                 byte partnerStatusOption;
@@ -245,8 +214,6 @@ public class PartnerMenu {
                 else if (partnerStatusOption == 2) partnerStatusValue = "INACTIVE";
                 else partnerStatusValue = "SUSPENDED";
                 partnerStatus = PartnerStatus.valueOf(partnerStatusValue);
-            }else {
-                partnerStatus = null;
             }
     
             /*
