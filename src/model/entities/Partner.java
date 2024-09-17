@@ -1,6 +1,5 @@
 package model.entities;
 
-import model.enums.TransportType;
 import model.enums.PartnerStatus;
 
 import java.time.LocalDate;
@@ -9,7 +8,7 @@ public class Partner {
     private int id;
     private String companyName;
     private String commercialContact; 
-    private TransportType transportType;
+    private String transportType;
     private String geographicalArea;
     private String specialConditions;
     private PartnerStatus partnerStatus;
@@ -19,7 +18,7 @@ public class Partner {
         int id,
         String companyName,
         String commercialContact,
-        TransportType transportType,
+        String transportType,
         String geographicalArea,
         String specialConditions,
         PartnerStatus partnerStatus,
@@ -52,7 +51,7 @@ public class Partner {
         return commercialContact;
     }
 
-    public TransportType getTransportType() {
+    public String getTransportType() {
         return transportType;
     }
 
@@ -85,7 +84,7 @@ public class Partner {
         this.commercialContact = commercialContact;
     }
 
-    public void setTransportType(TransportType transportType) {
+    public void setTransportType(String transportType) {
         this.transportType = transportType;
     }
 
@@ -122,4 +121,4 @@ public class Partner {
                 ", creationDate=" + creationDate +
                 '}';
     }
-} 
+}

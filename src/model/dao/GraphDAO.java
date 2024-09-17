@@ -33,7 +33,7 @@ public class GraphDAO {
                 String departure = rs.getString("departure");
                 String destination = rs.getString("destination");
                 int ticketId = rs.getInt("ticket_id");
-                TransportType transportType = TransportType.valueOf(rs.getString("transport_type"));
+                String transportType = rs.getString("transport_type");
                 float purchasePrice = rs.getFloat("purchase_price");
                 float salePrice = rs.getFloat("sale_price");
                 LocalDate saleDate = rs.getObject("sale_date", LocalDate.class);

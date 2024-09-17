@@ -8,7 +8,7 @@ import model.enums.TransportType;
 
 public class Ticket {
     private int id; 
-    private TransportType transportType; 
+    private String transportType; 
     private Float purchasePrice;
     private Float salePrice; 
     private LocalDate saleDate; 
@@ -21,7 +21,7 @@ public class Ticket {
 
     public Ticket(
         int id,
-        TransportType transportType,
+        String transportType,
         Float purchasePrice,
         Float salePrice,
         LocalDate saleDate, 
@@ -54,7 +54,7 @@ public class Ticket {
         return id;
     }
 
-    public TransportType getTransportType() {
+    public String getTransportType() {
         return transportType;
     }
 
@@ -98,7 +98,7 @@ public class Ticket {
      * Setters
     */
 
-    public void setTransportType(TransportType transportType) {
+    public void setTransportType(String transportType) {
         this.transportType = transportType;
     }
 

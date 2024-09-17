@@ -89,7 +89,7 @@ public class TicketMenu {
         System.out.println("||||||||||||||||||| ADD TICKET |||||||||||||||||||");
         int enteredContractId = getContractId();
 
-        TransportType transportType = getTransportType();
+        String transportType = getTransportType();
 
         System.out.print("\n    >>Set purchase price= ");
         Float purchasePrice = ScanInput.scanner.nextFloat();
@@ -124,7 +124,7 @@ public class TicketMenu {
 
             List<Integer> userOptions = getUserUpdateOptions();
 
-            TransportType transportType = null;
+            String transportType = null;
             if (userOptions.contains(1)) {
                 transportType = getTransportType();
             }
@@ -171,20 +171,10 @@ public class TicketMenu {
         }
     }
 
-    private TransportType getTransportType() {
-        String transportTypeValue;
-        byte transportTypeOption;
-        do {
-            System.out.print(" \n   >>transport type (1.PLANE, 2.TRAIN, 3.BUS)= ");
-            System.out.print("\n        <>set 1, 2 or 3 for an option= ");
-            transportTypeOption = ScanInput.scanner.nextByte();
-            ScanInput.scanner.nextLine();
-        } while (!(transportTypeOption == 1) && !(transportTypeOption == 2) && !(transportTypeOption == 3));
-        
-        if (transportTypeOption == 1) transportTypeValue = "PLANE";
-        else if (transportTypeOption == 2) transportTypeValue = "TRAIN";
-        else transportTypeValue = "BUS";
-        return TransportType.valueOf(transportTypeValue);
+    private String getTransportType() {
+        System.out.print(" \n   >>transport type (1.PLANE, 2.TRAIN, 3.BUS)= ");
+        String transportTypeValue = ScanInput.scanner.nextLine();
+        return transportTypeValue;
     }
 
     private TicketStatus getTicketStatus() {
